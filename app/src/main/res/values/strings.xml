@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">LikingApp</string>
+    <string name="personal_info">Dados Pessoais</string>
+    <string name="name">Nome</string>
+    <string name="surname">Sobrenome</string>
+    <string name="log_in">Log in</string>
+    <string name="password">Senha</string>
+    <string name="checkbox_save_info">Salvar Credenciais</string>
+    <string name="logo">Logo</string>
+    <string name="register">Registre-se</string>
+    <string name="facebook_icon">Ícone do Facebook</string>
+    <string name="gmail_icon">Ícone do Gmail</string>
+    <string name="acess_gallery">Acessar Galeria</string>
+    <string name="acess_register">Acessar Cadastro</string>
 </resources>
