@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LikingApp</string>
+    <string name="app_name">Liking App</string>
     <string name="personal_info">Dados Pessoais</string>
     <string name="name">Nome</string>
     <string name="surname">Sobrenome</string>
@@ -12,4 +12,5 @@
     <string name="gmail_icon">Ícone do Gmail</string>
     <string name="acess_gallery">Acessar Galeria</string>
     <string name="acess_register">Acessar Cadastro</string>
+    <string name="splash_screen"></string>
 </resources>

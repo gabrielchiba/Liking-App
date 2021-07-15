@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/splash_screen"
+            app:srcCompat="@drawable/ic_splash_screen" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="271dp"
+            android:layout_height="276dp"
+            android:contentDescription="@string/splash_screen"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/logo" />
+    </FrameLayout>
+</layout>
