@@ -24,7 +24,7 @@
         <item name="colorOnSecondary">@color/black</item>
 
         <item name="android:windowBackground">?colorOnPrimary</item>
-        <item name="android:textColor">?colorOnSecondary</item>
+        <item name="android:textColorPrimary">?colorOnSecondary</item>
         <item name="android:textColorHint">@color/light_gray</item>
         <item name="android:checkboxStyle">@style/MyCheckBoxStyle</item>
 
