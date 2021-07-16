@@ -27,6 +27,7 @@
         <item name="android:textColorPrimary">?colorOnSecondary</item>
         <item name="android:textColorHint">@color/light_gray</item>
         <item name="android:checkboxStyle">@style/MyCheckBoxStyle</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
 
         
     </style>
