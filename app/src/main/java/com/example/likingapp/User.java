@@ -1,13 +1,14 @@
 package com.example.likingapp;
 
 public class User {
-    private String name, surname, login, pass;
+    private String name, surname, login, pass, email;
 
-    public User(String name, String surname, String login, String pass) {
+    public User(String name, String surname, String login, String pass, String email) {
         this.name = name;
         this.surname = surname;
         this.login = login;
         this.pass = pass;
+        this.email = email;
     }
 
     public String getName() {
@@ -41,4 +42,8 @@ public class User {
     public void setPass(String pass) {
         this.pass = pass;
     }
+
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
 }

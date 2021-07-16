@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 //        setContentView(R.layout.activity_main);
         ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this,
                 R.layout.activity_main);
-        User user = new User("", "", "", "");
+        User user = new User("", "", "", "", "");
         activityMainBinding.setUser(user);
         activityMainBinding.buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,12 +35,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean haveBlankFields(User user) {
-        if (user.getName().equals("") || user.getSurname().equals("") ||
-                user.getLogin().equals("") || user.getPass().equals("")) {
-            return true;
-        } else {
-            return false;
-        }
+        return user.getName().equals("") || user.getSurname().equals("") ||
+                user.getLogin().equals("") || user.getPass().equals("");
     }
 
     public void registerEmail(View v) {
@@ -64,6 +60,12 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             Intent i = new Intent(MainActivity.this, simpleAPICallActivity.class);
+            String firstName = user.getName();
+            i.putExtra("com.example.likingapp.firstName", firstName);
+            String login = user.getLogin();
+            i.putExtra("com.example.likingapp.login", login);
+            String email = user.getEmail();
+            i.putExtra("com.example.likingapp.email", email);
             startActivity(i);
         }
     }

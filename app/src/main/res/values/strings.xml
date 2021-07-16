@@ -10,7 +10,7 @@
     <string name="register">Registre-se</string>
     <string name="facebook_icon">Ícone do Facebook</string>
     <string name="gmail_icon">Ícone do Gmail</string>
-    <string name="acess_gallery">Acessar Galeria</string>
+    <string name="acess_gallery">Acessar API</string>
     <string name="acess_register">Acessar Cadastro</string>
     <string name="splash_screen"></string>
 </resources>
