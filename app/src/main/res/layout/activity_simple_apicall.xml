@@ -35,10 +35,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginStart="10sp"
+                    android:layout_marginTop="20sp"
                     android:fontFamily="@font/montserrat_semi_bold"
                     android:text="@{`Olá, ` + firstName}"
-                    android:textSize="24sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -47,7 +47,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="@{`login: ` + login}" />
+                    android:text="@{`login: ` + login}"
+                    android:textColor="@color/light_gray"
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/textViewEmailApi"
@@ -55,7 +57,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="@{email}" />
+                    android:text="@{email}"
+                    android:textColor="@color/light_gray"
+                    android:textSize="10sp" />
             </LinearLayout>
 
         </FrameLayout>
