@@ -135,8 +135,8 @@
 
                 <ImageView
                     android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_weight="0"
                     android:contentDescription="@string/facebook_icon"
                     app:srcCompat="@drawable/facebook" />
@@ -151,8 +151,8 @@
 
                 <ImageView
                     android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_weight="0"
                     android:contentDescription="@string/gmail_icon"
                     app:srcCompat="@drawable/gmail" />
