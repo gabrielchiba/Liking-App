@@ -1,8 +1,13 @@
 package com.example.likingapp;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,16 +25,35 @@ public class MainActivity extends AppCompatActivity {
                 R.layout.activity_main);
         User user = new User("", "", "", "", "");
         activityMainBinding.setUser(user);
+
+        ActivityResultLauncher<Intent> emailActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        assert data != null;
+                        String email = data.getStringExtra("com.example.likingapp.registeredMail");
+                        user.setEmail(email);
+                        activityMainBinding.setUser(user);
+                    }
+                });
+
         activityMainBinding.buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerAcess(v, user);
+                registerEmail(v, user, emailActivityResultLauncher);
             }
         });
         activityMainBinding.buttonApi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 apiAcess(v, user);
+            }
+        });
+        activityMainBinding.buttonAccess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registerAccess(v, user);
             }
         });
     }
@@ -39,12 +63,18 @@ public class MainActivity extends AppCompatActivity {
                 user.getLogin().equals("") || user.getPass().equals("");
     }
 
-    public void registerEmail(View v) {
-        Intent i = new Intent(MainActivity.this, RegisterEmailActivity.class);
-        startActivity(i);
+    public void registerEmail(View v, User user, ActivityResultLauncher<Intent> emailActivityResultLauncher) {
+        if (haveBlankFields(user)) {
+            Toast.makeText(this, "Complete todos os campos", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent i = new Intent(MainActivity.this, RegisterEmailActivity.class);
+
+
+            emailActivityResultLauncher.launch(i);
+        }
     }
 
-    public void registerAcess(View v, User user) {
+    public void registerAccess(View v, User user) {
         if (haveBlankFields(user)) {
             Toast.makeText(this, "Complete todos os campos", Toast.LENGTH_SHORT).show();
         }

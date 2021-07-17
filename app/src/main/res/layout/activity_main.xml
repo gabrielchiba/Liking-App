@@ -113,14 +113,18 @@
                 android:layout_weight="0"
                 android:text="@string/checkbox_save_info" />
 
-            <TextView
-                android:id="@+id/textViewRegister"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/buttonRegister"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="150sp"
+                android:layout_marginTop="10sp"
                 android:layout_marginBottom="3sp"
                 android:layout_weight="0"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:gravity="center_horizontal"
-                android:text="@string/register" />
+                android:text="@string/register"
+                android:textAllCaps="false" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -151,12 +155,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:contentDescription="@string/gmail_icon"
-                    android:onClick="registerEmail"
                     app:srcCompat="@drawable/gmail" />
             </LinearLayout>
 
             <Button
-                android:id="@+id/buttonRegister"
+                android:id="@+id/buttonAccess"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3sp"
