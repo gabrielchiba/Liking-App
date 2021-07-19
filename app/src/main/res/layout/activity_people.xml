@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PeopleActivity">
+    tools:context=".model_view_presenter.people.PeopleActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

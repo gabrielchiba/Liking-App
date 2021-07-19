@@ -1,7 +1,5 @@
-package com.example.likingapp;
+package com.example.likingapp.model_view_presenter.loginup_register;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,18 +11,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.likingapp.databinding.ActivityMainBinding;
+import com.example.likingapp.model_view_presenter.people.PeopleActivity;
+import com.example.likingapp.R;
+import com.example.likingapp.model_view_presenter.register_email.RegisterEmailActivity;
+import com.example.likingapp.User;
+import com.example.likingapp.databinding.ActivityLoginupRegisterBinding;
+import com.example.likingapp.model_view_presenter.simple_api_call.simpleAPICallActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginUpRegisterActivity extends AppCompatActivity implements LoginUpRegisterContract.View {
+
+    private ActivityLoginupRegisterBinding binding;
+    private LoginUpRegisterContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-        ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this,
-                R.layout.activity_main);
+        presenter = new LoginUpRegisterPresenter(this, this);
+
+        binding = DataBindingUtil.setContentView(this,
+                R.layout.activity_loginup_register);
         User user = new User("", "", "", "", "");
-        activityMainBinding.setUser(user);
+        binding.setUser(user);
 
         ActivityResultLauncher<Intent> emailActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -34,28 +41,13 @@ public class MainActivity extends AppCompatActivity {
                         assert data != null;
                         String email = data.getStringExtra("com.example.likingapp.registeredMail");
                         user.setEmail(email);
-                        activityMainBinding.setUser(user);
+                        binding.setUser(user);
                     }
                 });
 
-        activityMainBinding.buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registerEmail(v, user, emailActivityResultLauncher);
-            }
-        });
-        activityMainBinding.buttonApi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                apiAcess(v, user);
-            }
-        });
-        activityMainBinding.buttonAccess.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registerAccess(v, user);
-            }
-        });
+        binding.buttonRegister.setOnClickListener(v -> registerEmail(v, user, emailActivityResultLauncher));
+        binding.buttonApi.setOnClickListener(v -> apiAccess(v, user));
+        binding.buttonAccess.setOnClickListener(v -> registerAccess(v, user));
     }
 
     public boolean haveBlankFields(User user) {
@@ -67,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         if (haveBlankFields(user)) {
             Toast.makeText(this, "Complete todos os campos", Toast.LENGTH_SHORT).show();
         } else {
-            Intent i = new Intent(MainActivity.this, RegisterEmailActivity.class);
+            Intent i = new Intent(LoginUpRegisterActivity.this, RegisterEmailActivity.class);
 
 
             emailActivityResultLauncher.launch(i);
@@ -79,17 +71,17 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Complete todos os campos", Toast.LENGTH_SHORT).show();
         }
         else {
-            Intent i = new Intent(MainActivity.this, PeopleActivity.class);
+            Intent i = new Intent(LoginUpRegisterActivity.this, PeopleActivity.class);
             startActivity(i);
         }
 
     }
-    public void apiAcess(View v, User user) {
+    public void apiAccess(View v, User user) {
         if (haveBlankFields(user)) {
             Toast.makeText(this, "Complete todos os campos", Toast.LENGTH_SHORT).show();
         }
         else {
-            Intent i = new Intent(MainActivity.this, simpleAPICallActivity.class);
+            Intent i = new Intent(LoginUpRegisterActivity.this, simpleAPICallActivity.class);
             String firstName = user.getName();
             i.putExtra("com.example.likingapp.firstName", firstName);
             String login = user.getLogin();

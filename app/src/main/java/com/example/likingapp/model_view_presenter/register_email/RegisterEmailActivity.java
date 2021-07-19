@@ -1,4 +1,4 @@
-package com.example.likingapp;
+package com.example.likingapp.model_view_presenter.register_email;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.likingapp.R;
 import com.example.likingapp.databinding.ActivityRegisterEmailBinding;
 
 public class RegisterEmailActivity extends AppCompatActivity {

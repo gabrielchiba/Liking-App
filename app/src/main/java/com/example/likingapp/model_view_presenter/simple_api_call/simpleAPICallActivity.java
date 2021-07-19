@@ -1,11 +1,11 @@
-package com.example.likingapp;
+package com.example.likingapp.model_view_presenter.simple_api_call;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 
-import com.example.likingapp.databinding.ActivityMainBinding;
+import com.example.likingapp.R;
 import com.example.likingapp.databinding.ActivitySimpleApicallBinding;
 
 public class simpleAPICallActivity extends AppCompatActivity {
