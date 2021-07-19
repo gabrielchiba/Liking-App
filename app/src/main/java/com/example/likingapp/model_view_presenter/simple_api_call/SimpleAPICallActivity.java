@@ -8,19 +8,22 @@ import android.os.Bundle;
 import com.example.likingapp.R;
 import com.example.likingapp.databinding.ActivitySimpleApicallBinding;
 
-public class simpleAPICallActivity extends AppCompatActivity {
+public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAPICallContract.View{
+
+    private ActivitySimpleApicallBinding binding;
+    private SimpleAPICallContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DataBindingUtil.setContentView(this, R.layout.activity_simple_apicall);
-        ActivitySimpleApicallBinding activitySimpleApicallBinding = DataBindingUtil.setContentView(this,
+        presenter = new SimpleAPICallPresenter(this, this);
+        binding = DataBindingUtil.setContentView(this,
                 R.layout.activity_simple_apicall);
         String firstName = getIntent().getStringExtra("com.example.likingapp.firstName");
-        if (firstName != null)  activitySimpleApicallBinding.setFirstName(firstName);
+        if (firstName != null)  binding.setFirstName(firstName);
         String login = getIntent().getStringExtra("com.example.likingapp.login");
-        if (login != null) activitySimpleApicallBinding.setLogin(login);
+        if (login != null) binding.setLogin(login);
         String email = getIntent().getStringExtra("com.example.likingapp.email");
-        if (email != null) activitySimpleApicallBinding.setEmail(email);
+        if (email != null) binding.setEmail(email);
     }
 }

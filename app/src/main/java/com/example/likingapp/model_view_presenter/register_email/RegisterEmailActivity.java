@@ -12,35 +12,32 @@ import android.widget.Toast;
 import com.example.likingapp.R;
 import com.example.likingapp.databinding.ActivityRegisterEmailBinding;
 
-public class RegisterEmailActivity extends AppCompatActivity {
+public class RegisterEmailActivity extends AppCompatActivity implements RegisterEmailContract.View{
+
+    private ActivityRegisterEmailBinding binding;
+    private RegisterEmailContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ActivityRegisterEmailBinding activityRegisterEmailBinding = DataBindingUtil.setContentView(this,
+        presenter = new RegisterEmailPresenter(this, this);
+        binding = DataBindingUtil.setContentView(this,
                 R.layout.activity_register_email);
 
-        activityRegisterEmailBinding.buttonConfirm.setOnClickListener(new View.OnClickListener() {
+        binding.buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                confirmEmail(v, activityRegisterEmailBinding);
+                confirmEmail(v);
             }
         });
 
     }
 
-    public static boolean isValidEmail(CharSequence target) {
-        if (target == null) {
-            return false;
-        } else {
-            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
-        }
-    }
-
-    public void confirmEmail(View v, ActivityRegisterEmailBinding activityRegisterEmailBinding) {
-        String registeredMail = activityRegisterEmailBinding.getEmail();
-        if (isValidEmail(registeredMail)) {
+    @Override
+    public void confirmEmail(View v) {
+        String registeredMail = binding.getEmail();
+        if (presenter.isValidEmail(registeredMail)) {
             Intent returnIntent = new Intent();
             returnIntent.putExtra("com.example.likingapp.registeredMail", registeredMail);
             setResult(Activity.RESULT_OK,returnIntent);

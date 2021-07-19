@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LikingAppNoBar">
-        <activity android:name=".model_view_presenter.simple_api_call.simpleAPICallActivity"></activity>
+        <activity android:name=".model_view_presenter.simple_api_call.SimpleAPICallActivity"></activity>
         <activity android:name=".model_view_presenter.people.PeopleActivity" />
         <activity android:name=".model_view_presenter.register_email.RegisterEmailActivity" />
         <activity android:name=".model_view_presenter.splash_screen.SplashScreenActivity">

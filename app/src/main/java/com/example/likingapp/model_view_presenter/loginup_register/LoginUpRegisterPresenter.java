@@ -1,6 +1,9 @@
 package com.example.likingapp.model_view_presenter.loginup_register;
 
 import android.content.Context;
+import android.content.Intent;
+
+import androidx.activity.result.ActivityResultLauncher;
 
 import com.example.likingapp.User;
 
@@ -14,7 +17,8 @@ public class LoginUpRegisterPresenter implements LoginUpRegisterContract.Present
     }
 
     @Override
-    public void init(User user) {
-//        this.view.haveBlankFields(user);
+    public boolean haveBlankFields(User user) {
+        return user.getName().equals("") || user.getSurname().equals("") ||
+                user.getLogin().equals("") || user.getPass().equals("");
     }
 }
