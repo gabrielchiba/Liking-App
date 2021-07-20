@@ -57,7 +57,7 @@
                     android:inputType="textPersonName" />
 
                 <EditText
-                    android:id="@+id/editTextPersonPhone"
+                    android:id="@+id/editTextLastName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -82,7 +82,7 @@
                 android:layout_marginBottom="3sp"
                 android:layout_weight="0"
                 android:ems="10"
-                android:hint="Log in"
+                android:hint="@string/log_in"
                 android:text="@={user.login}"
                 android:inputType="textPersonName" />
 
@@ -101,7 +101,7 @@
                 android:layout_marginBottom="3sp"
                 android:layout_weight="0"
                 android:ems="10"
-                android:hint="Senha"
+                android:hint="@string/password"
                 android:text="@={user.password}"
                 android:inputType="textPassword" />
 
@@ -123,7 +123,7 @@
                 android:layout_marginBottom="3sp"
                 android:layout_weight="0"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:text="@string/register"
                 android:textAllCaps="false" />
 

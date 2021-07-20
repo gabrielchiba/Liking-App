@@ -9,7 +9,7 @@
             name="name"
             type="String" />
         <variable
-            name="last_name"
+            name="lastName"
             type="String" />
         <variable
             name="birthday"
@@ -56,7 +56,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView7"
+                android:id="@+id/imageViewAvatar"
                 android:layout_width="wrap_content"
                 android:layout_height="107dp"
                 android:layout_gravity="center"
@@ -89,7 +89,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textViewName"
+                        android:id="@+id/textViewName1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3sp"
@@ -97,7 +97,7 @@
                         android:textSize="12sp" />
 
                     <EditText
-                        android:id="@+id/editTextPersonName"
+                        android:id="@+id/editTextPersonName1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -115,7 +115,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textViewSurname"
+                        android:id="@+id/textViewLastName1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3sp"
@@ -124,14 +124,14 @@
                         android:textSize="12sp" />
 
                     <EditText
-                        android:id="@+id/editTextLastName"
+                        android:id="@+id/editTextLastName2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
                         android:hint="@string/surname"
                         android:inputType="textPersonName"
-                        android:text="@={last_name}"
+                        android:text="@={lastName}"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -199,7 +199,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textViewLastName"
+                        android:id="@+id/textViewPhone1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3sp"
