@@ -8,7 +8,6 @@ import android.os.Bundle;
 
 import com.example.likingapp.R;
 import com.example.likingapp.databinding.ActivityPeopleBinding;
-import com.example.likingapp.model_view_presenter.loginup_register.LoginUpRegisterContract;
 
 public class PeopleActivity extends AppCompatActivity implements PeopleContract.View{
 
