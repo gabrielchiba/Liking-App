@@ -1,11 +1,8 @@
 package com.example.likingapp.model_view_presenter.loginup_register;
 
 import android.content.Context;
-import android.content.Intent;
 
-import androidx.activity.result.ActivityResultLauncher;
-
-import com.example.likingapp.User;
+import com.example.likingapp.models.OwnUser;
 
 public class LoginUpRegisterPresenter implements LoginUpRegisterContract.Presenter {
     private LoginUpRegisterContract.View view;
@@ -17,8 +14,8 @@ public class LoginUpRegisterPresenter implements LoginUpRegisterContract.Present
     }
 
     @Override
-    public boolean haveBlankFields(User user) {
-        return user.getName().equals("") || user.getSurname().equals("") ||
-                user.getLogin().equals("") || user.getPass().equals("");
+    public boolean haveBlankFields(OwnUser user) {
+        return user.name.equals("") || user.lastName.equals("") ||
+                user.login.equals("") || user.password.equals("");
     }
 }

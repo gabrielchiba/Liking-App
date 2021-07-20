@@ -6,7 +6,7 @@
     <data>
         <variable
             name="user"
-            type="com.example.likingapp.User"/>
+            type="com.example.likingapp.models.OwnUser"/>
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/surname"
-                    android:text="@={user.surname}"
+                    android:text="@={user.lastName}"
                     android:inputType="textPersonName" />
             </LinearLayout>
 
@@ -102,7 +102,7 @@
                 android:layout_weight="0"
                 android:ems="10"
                 android:hint="Senha"
-                android:text="@={user.pass}"
+                android:text="@={user.password}"
                 android:inputType="textPassword" />
 
             <CheckBox
@@ -111,7 +111,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3sp"
                 android:layout_weight="0"
-                android:text="@string/checkbox_save_info" />
+                android:text="@string/checkbox_save_info"
+                android:checked="@={user.saveCredentials}"/>
 
             <Button
                 android:id="@+id/buttonRegister"

@@ -4,19 +4,19 @@ import android.content.Intent;
 
 import androidx.activity.result.ActivityResultLauncher;
 
-import com.example.likingapp.User;
+import com.example.likingapp.models.OwnUser;
 
 public interface LoginUpRegisterContract {
 
     interface View {
-        ActivityResultLauncher<Intent> createEmailActivityLauncher(User user);
-        void registerEmail(android.view.View v, User user, ActivityResultLauncher<Intent> emailActivityResultLauncher);
-        void registerAccess(android.view.View v, User user);
-        void apiAccess(android.view.View v, User user);
+        ActivityResultLauncher<Intent> createEmailActivityLauncher(OwnUser user);
+        void registerEmail(android.view.View v, OwnUser user, ActivityResultLauncher<Intent> emailActivityResultLauncher);
+        void registerAccess(android.view.View v, OwnUser user);
+        void apiAccess(android.view.View v, OwnUser user);
     }
 
     interface Presenter {
-        boolean haveBlankFields(User user);
+        boolean haveBlankFields(OwnUser user);
 
     }
 }
