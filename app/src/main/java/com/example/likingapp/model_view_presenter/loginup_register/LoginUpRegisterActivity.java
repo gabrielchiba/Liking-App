@@ -51,7 +51,7 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         assert data != null;
-                        user.email = data.getStringExtra("com.example.likingapp.registeredMail");
+                        user.email = data.getStringExtra("registeredMail");
                         binding.setUser(user);
                     }
                 });
@@ -60,7 +60,7 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
     @Override
     public void registerEmail(View v, OwnUser user, ActivityResultLauncher<Intent> emailActivityResultLauncher) {
         if (presenter.haveBlankFields(user)) {
-            Toast.makeText(this, "Complete todos os campos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, this.getString(R.string.complete_fields), Toast.LENGTH_SHORT).show();
         } else {
             Intent i = new Intent(LoginUpRegisterActivity.this, RegisterEmailActivity.class);
 
@@ -72,7 +72,7 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
     @Override
     public void registerAccess(View v, OwnUser user) {
         if (presenter.haveBlankFields(user)) {
-            Toast.makeText(this, "Complete todos os campos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, this.getString(R.string.complete_fields), Toast.LENGTH_SHORT).show();
         }
         else {
             Intent i = new Intent(LoginUpRegisterActivity.this, PeopleActivity.class);
@@ -84,13 +84,13 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
     @Override
     public void apiAccess(View v, OwnUser user) {
         if (presenter.haveBlankFields(user)) {
-            Toast.makeText(this, "Complete todos os campos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, this.getString(R.string.complete_fields), Toast.LENGTH_SHORT).show();
         }
         else {
             Intent i = new Intent(LoginUpRegisterActivity.this, SimpleAPICallActivity.class);
-            i.putExtra("com.example.likingapp.firstName", user.name);
-            i.putExtra("com.example.likingapp.login", user.login);
-            i.putExtra("com.example.likingapp.email", user.email);
+            i.putExtra("firstName", user.name);
+            i.putExtra("login", user.login);
+            i.putExtra("email", user.email);
             startActivity(i);
         }
     }

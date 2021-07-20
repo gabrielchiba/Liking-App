@@ -23,4 +23,6 @@
     <string name="birthday_date">Data de Nascimento</string>
     <string name="phone_number">Telefone</string>
     <string name="cpf">CPF</string>
+    <string name="complete_fields">Complete todos os campos</string>
+    <string name="insert_valid_email">Insira um email válido</string>
 </resources>

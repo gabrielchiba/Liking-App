@@ -19,11 +19,11 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
         presenter = new SimpleAPICallPresenter(this, this);
         binding = DataBindingUtil.setContentView(this,
                 R.layout.activity_simple_apicall);
-        String firstName = getIntent().getStringExtra("com.example.likingapp.firstName");
+        String firstName = getIntent().getStringExtra("firstName");
         if (firstName != null)  binding.setFirstName(firstName);
-        String login = getIntent().getStringExtra("com.example.likingapp.login");
+        String login = getIntent().getStringExtra("login");
         if (login != null) binding.setLogin(login);
-        String email = getIntent().getStringExtra("com.example.likingapp.email");
+        String email = getIntent().getStringExtra("email");
         if (email != null) binding.setEmail(email);
     }
 }

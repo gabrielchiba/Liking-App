@@ -39,11 +39,11 @@ public class RegisterEmailActivity extends AppCompatActivity implements Register
         String registeredMail = binding.getEmail();
         if (presenter.isValidEmail(registeredMail)) {
             Intent returnIntent = new Intent();
-            returnIntent.putExtra("com.example.likingapp.registeredMail", registeredMail);
+            returnIntent.putExtra("registeredMail", registeredMail);
             setResult(Activity.RESULT_OK,returnIntent);
             finish();
         } else {
-            Toast.makeText(this, "Insira um email válido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, this.getString(R.string.insert_valid_email), Toast.LENGTH_SHORT).show();
         }
     }
 }
