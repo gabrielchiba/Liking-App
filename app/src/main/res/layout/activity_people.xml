@@ -3,12 +3,84 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@color/light_bright_gray">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="117dp"
+            android:background="@color/white"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewNameApi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="170sp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/people"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="49dp"
+                    android:layout_marginStart="110sp"
+                    android:layout_marginTop="10sp"
+                    android:contentDescription="@string/logo"
+                    app:srcCompat="@drawable/logo" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@color/white"
+                android:gravity="center_horizontal"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme">
+
+                <SearchView
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="10sp"
+                    android:iconifiedByDefault="false"
+                    android:queryHint="@string/search" />
+            </androidx.appcompat.widget.Toolbar>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="613dp"
+            android:layout_marginTop="117sp"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:src="@drawable/ic_add_icon"
+            android:contentDescription="@string/add_person"
+            android:layout_margin="16dp" />
+
+    </FrameLayout>
+
 </layout>

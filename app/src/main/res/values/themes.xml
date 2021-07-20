@@ -22,13 +22,13 @@
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorOnSecondary">@color/black</item>
+        <!--        FAB Color-->
+        <item name="colorAccent">@color/dark_blue</item>
         <item name="android:textColor">?colorOnSecondary</item>
         <item name="android:windowBackground">?colorOnPrimary</item>
         <item name="android:textColorPrimary">?colorOnSecondary</item>
         <item name="android:textColorHint">@color/light_gray</item>
         <item name="android:checkboxStyle">@style/MyCheckBoxStyle</item>
         <item name="android:fontFamily">@font/montserrat_regular</item>
-
-        
     </style>
 </resources>

@@ -15,4 +15,12 @@
     <string name="splash_screen"></string>
     <string name="email">email</string>
     <string name="confirmar">Confirmar</string>
+    <string name="people">Pessoas</string>
+    <string name="search">Pesquisar</string>
+    <string name="add_person">Adicionar Pessoa</string>
+    <string name="register_person">Cadastrar Pessoas</string>
+    <string name="avatar">Avatar</string>
+    <string name="birthday_date">Data de Nascimento</string>
+    <string name="phone_number">Telefone</string>
+    <string name="cpf">CPF</string>
 </resources>

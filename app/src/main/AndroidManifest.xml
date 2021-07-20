@@ -3,15 +3,15 @@
     package="com.example.likingapp">
 
     <application
+        android:name=".utils.LikingApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".utils.LikingApp"
         android:theme="@style/Theme.LikingAppNoBar">
-
-        <activity android:name=".model_view_presenter.simple_api_call.SimpleAPICallActivity"></activity>
+        <activity android:name=".model_view_presenter.register_person.RegisterPersonActivity"></activity>
+        <activity android:name=".model_view_presenter.simple_api_call.SimpleAPICallActivity" />
         <activity android:name=".model_view_presenter.people.PeopleActivity" />
         <activity android:name=".model_view_presenter.register_email.RegisterEmailActivity" />
         <activity android:name=".model_view_presenter.splash_screen.SplashScreenActivity">
