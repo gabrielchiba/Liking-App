@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-//import android.util.Log;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,6 +18,7 @@ import com.example.likingapp.model_view_presenter.register_email.RegisterEmailAc
 import com.example.likingapp.databinding.ActivityLoginupRegisterBinding;
 import com.example.likingapp.model_view_presenter.simple_api_call.SimpleAPICallActivity;
 import com.example.likingapp.models.OwnUser;
+import com.facebook.stetho.Stetho;
 
 public class LoginUpRegisterActivity extends AppCompatActivity implements LoginUpRegisterContract.View {
 
@@ -27,6 +28,7 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Stetho.initializeWithDefaults(this);
         presenter = new LoginUpRegisterPresenter(this, this);
 
         binding = DataBindingUtil.setContentView(this,
@@ -34,13 +36,14 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
         OwnUser user = new OwnUser();
         binding.setUser(user);
 
+//        Log.d("SQL", String.valueOf(Query.one(OwnUser.class, " SELECT * FROM own_user WHERE ID = 2", true).get()));
+
         ActivityResultLauncher<Intent> emailActivityResultLauncher = createEmailActivityLauncher(user);
 
         binding.buttonRegister.setOnClickListener(v -> registerEmail(v, user, emailActivityResultLauncher));
         binding.buttonApi.setOnClickListener(v -> apiAccess(v, user));
         binding.buttonAccess.setOnClickListener(v -> registerAccess(v, user));
 
-//        Log.d("SAVE CREDENTIALS: ", String.valueOf(user.saveCredentials));
     }
 
     @Override
@@ -53,6 +56,7 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
                         assert data != null;
                         user.email = data.getStringExtra("registeredMail");
                         binding.setUser(user);
+                        user.save();
                     }
                 });
     }
