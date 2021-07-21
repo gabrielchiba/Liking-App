@@ -1,4 +1,4 @@
-package com.example.likingapp.utils;
+package com.example.likingapp;
 
 import android.app.Application;
 

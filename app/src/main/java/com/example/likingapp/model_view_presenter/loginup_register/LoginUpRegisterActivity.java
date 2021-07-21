@@ -8,11 +8,10 @@ import androidx.databinding.DataBindingUtil;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.likingapp.model_view_presenter.people.PeopleActivity;
+import com.example.likingapp.model_view_presenter.people_list.PeopleListActivity;
 import com.example.likingapp.R;
 import com.example.likingapp.model_view_presenter.register_email.RegisterEmailActivity;
 import com.example.likingapp.databinding.ActivityLoginupRegisterBinding;
@@ -79,7 +78,7 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
             Toast.makeText(this, this.getString(R.string.complete_fields), Toast.LENGTH_SHORT).show();
         }
         else {
-            Intent i = new Intent(LoginUpRegisterActivity.this, PeopleActivity.class);
+            Intent i = new Intent(LoginUpRegisterActivity.this, PeopleListActivity.class);
             startActivity(i);
         }
 
