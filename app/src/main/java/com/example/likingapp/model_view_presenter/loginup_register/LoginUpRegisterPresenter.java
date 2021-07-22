@@ -18,4 +18,15 @@ public class LoginUpRegisterPresenter implements LoginUpRegisterContract.Present
         return user.name==null || user.lastName==null ||
                 user.login==null || user.password==null;
     }
+
+    @Override
+    public OwnUser createNewEmptyOwnUser() {
+        return new OwnUser();
+    }
+
+    @Override
+    public void registerOwnUserOnDB(OwnUser ownUser) {
+        ownUser.save();
+    }
+
 }

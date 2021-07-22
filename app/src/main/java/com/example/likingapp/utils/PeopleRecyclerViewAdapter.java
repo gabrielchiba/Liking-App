@@ -4,9 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.databinding.DataBindingUtil;
+
+import com.example.likingapp.BR;
+import com.example.likingapp.databinding.RecyclerviewPeopleRowBinding;
+
+import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.likingapp.R;
@@ -15,8 +19,8 @@ import java.util.List;
 
 public class PeopleRecyclerViewAdapter extends RecyclerView.Adapter<PeopleRecyclerViewAdapter.ViewHolder> {
 
-    private List<String> mData;
-    private LayoutInflater mInflater;
+    private final List<String> mData;
+    private final LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
@@ -28,16 +32,16 @@ public class PeopleRecyclerViewAdapter extends RecyclerView.Adapter<PeopleRecycl
     // inflates the row layout from xml when needed
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        View view = mInflater.inflate(R.layout.recyclerview_people_row, parent, false);
-        return new ViewHolder(view);
+        RecyclerviewPeopleRowBinding recyclerviewPeopleRowBinding =
+                RecyclerviewPeopleRowBinding.inflate(mInflater, parent, false);
+        return new ViewHolder(recyclerviewPeopleRowBinding);
     }
 
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String animal = mData.get(position);
-        holder.myTextView.setText(animal);
+        Object obj = mData.get(position);
+        holder.bind(obj);
     }
 
     // total number of rows
@@ -49,12 +53,17 @@ public class PeopleRecyclerViewAdapter extends RecyclerView.Adapter<PeopleRecycl
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView myTextView;
+        private final ViewDataBinding binding;
 
-        ViewHolder(View itemView) {
-            super(itemView);
-            myTextView = itemView.findViewById(R.id.textView);
-            itemView.setOnClickListener(this);
+        ViewHolder(ViewDataBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+            binding.getRoot().setOnClickListener(this);
+        }
+
+        public void bind(Object obj) {
+            binding.setVariable(BR.obj, obj);
+            binding.executePendingBindings();
         }
 
         @Override
@@ -64,7 +73,7 @@ public class PeopleRecyclerViewAdapter extends RecyclerView.Adapter<PeopleRecycl
     }
 
     // convenience method for getting data at click position
-    String getItem(int id) {
+    public String getItem(int id) {
         return mData.get(id);
     }
 

@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,6 +19,8 @@ import com.example.likingapp.databinding.ActivityLoginupRegisterBinding;
 import com.example.likingapp.model_view_presenter.simple_api_call.SimpleAPICallActivity;
 import com.example.likingapp.models.OwnUser;
 import com.facebook.stetho.Stetho;
+
+import se.emilsjolander.sprinkles.Query;
 
 public class LoginUpRegisterActivity extends AppCompatActivity implements LoginUpRegisterContract.View {
 
@@ -32,10 +35,11 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
 
         binding = DataBindingUtil.setContentView(this,
                 R.layout.activity_loginup_register);
-        OwnUser user = new OwnUser();
+        OwnUser user = presenter.createNewEmptyOwnUser();
+
         binding.setUser(user);
 
-//        Log.d("SQL", String.valueOf(Query.one(OwnUser.class, " SELECT * FROM own_user WHERE ID = 2", true).get()));
+//        Log.d("SQL", String.valueOf(Query.one(OwnUser.class, " SELECT * FROM own_user WHERE ID = 1", true).get()));
 
         ActivityResultLauncher<Intent> emailActivityResultLauncher = createEmailActivityLauncher(user);
 
@@ -54,8 +58,8 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
                         Intent data = result.getData();
                         assert data != null;
                         user.email = data.getStringExtra("registeredMail");
-                        binding.setUser(user);
-                        user.save();
+//                        Log.d("USER", user.id + user.name + user.lastName + user.login + user.password + user.saveCredentials);
+                        presenter.registerOwnUserOnDB(user);
                     }
                 });
     }
@@ -66,7 +70,6 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
             Toast.makeText(this, this.getString(R.string.complete_fields), Toast.LENGTH_SHORT).show();
         } else {
             Intent i = new Intent(LoginUpRegisterActivity.this, RegisterEmailActivity.class);
-
 
             emailActivityResultLauncher.launch(i);
         }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.likingapp.R;
 import com.example.likingapp.databinding.ActivityPeopleListBinding;
@@ -46,6 +47,11 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
     }
 
     @Override
+    public void onItemClick(View view, int position) {
+        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void createFab() {
         binding.fab.setOnClickListener(view -> {
             Intent i = new Intent(PeopleListActivity.this, RegisterPersonActivity.class);
@@ -53,8 +59,4 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
         });
     }
 
-    @Override
-    public void onItemClick(View view, int position) {
-
-    }
 }

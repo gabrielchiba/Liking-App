@@ -6,23 +6,8 @@
     <data>
 
         <variable
-            name="name"
-            type="String" />
-        <variable
-            name="lastName"
-            type="String" />
-        <variable
-            name="birthday"
-            type="String" />
-        <variable
-            name="phone"
-            type="String" />
-        <variable
-            name="cpf"
-            type="String" />
-        <variable
-            name="email"
-            type="String" />
+            name="person"
+            type="com.example.likingapp.models.Person" />
     </data>
 
     <LinearLayout
@@ -103,7 +88,7 @@
                         android:ems="10"
                         android:hint="@string/name"
                         android:inputType="textPersonName"
-                        android:text="@={name}"
+                        android:text="@={person.name}"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -131,7 +116,7 @@
                         android:ems="10"
                         android:hint="@string/surname"
                         android:inputType="textPersonName"
-                        android:text="@={lastName}"
+                        android:text="@={person.lastName}"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -173,7 +158,7 @@
                             android:layout_weight="1"
                             android:ems="10"
                             android:inputType="date"
-                            android:text="@={birthday}"
+                            android:text="@={person.birthday}"
                             android:textSize="14sp" />
 
                         <ImageView
@@ -214,7 +199,7 @@
                         android:layout_weight="1"
                         android:ems="10"
                         android:inputType="phone"
-                        android:text="@={phone}"
+                        android:text="@={person.phone}"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -244,7 +229,7 @@
                     android:layout_weight="0"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="@={cpf}"
+                    android:text="@={person.cpf}"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -272,7 +257,7 @@
                     android:ems="10"
                     android:hint="@string/email"
                     android:inputType="textPersonName"
-                    android:text="@={email}"
+                    android:text="@={person.email}"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -282,7 +267,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
                 android:layout_weight="0"
-                android:text="@string/acess_register" />
+                android:text="@string/register_button" />
 
         </LinearLayout>
 
