@@ -84,8 +84,9 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
             if (presenter.isUserWrong(user, presenter.getUserByLogin(user.login))) {
                 Toast.makeText(this, this.getString(R.string.user_exists), Toast.LENGTH_SHORT).show();
             } else {
+                Toast.makeText(this, R.string.success_login, Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(LoginUpRegisterActivity.this, PeopleListActivity.class);
-                i.putExtra("registeredUserID", user.id);
+                i.putExtra("registeredUserID", presenter.getUserByLogin(user.login).id);
                 startActivity(i);
             }
 

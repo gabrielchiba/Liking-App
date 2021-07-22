@@ -23,9 +23,11 @@
     <string name="birthday_date">Data de Nascimento</string>
     <string name="phone_number">Telefone</string>
     <string name="cpf">CPF</string>
-    <string name="complete_fields">Complete todos os campos</string>
-    <string name="insert_valid_email">Insira um email válido</string>
+    <string name="complete_fields">Complete Todos os Campos</string>
+    <string name="insert_valid_email">Insira um Email Válido</string>
     <string name="register_button">Cadastrar</string>
-    <string name="user_exists">Usuário já existe</string>
+    <string name="user_exists">Usuário Já Existe</string>
     <string name="incorrect_phone_format">Telefone Inválido</string>
+    <string name="cpf_exist">CPF Já Existe</string>
+    <string name="success_login">Login Realizado com Sucesso</string>
 </resources>
