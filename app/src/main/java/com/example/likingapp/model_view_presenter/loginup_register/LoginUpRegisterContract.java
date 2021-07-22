@@ -19,5 +19,8 @@ public interface LoginUpRegisterContract {
         boolean haveBlankFields(OwnUser user);
         OwnUser createNewEmptyOwnUser();
         void registerOwnUserOnDB(OwnUser ownUser);
+        boolean checkUserLoginExist(OwnUser user);
+        boolean isUserWrong(OwnUser user, OwnUser registeredUser);
+        OwnUser getUserByLogin(String login);
     }
 }

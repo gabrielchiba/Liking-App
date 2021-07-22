@@ -39,7 +39,7 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
 
         binding.setUser(user);
 
-//        Log.d("SQL", String.valueOf(Query.one(OwnUser.class, " SELECT * FROM own_user WHERE ID = 1", true).get()));
+//        Log.d("SQL", String.valueOf(Query.one(OwnUser.class, " SELECT * FROM own_user WHERE name = '"+name+"'", true).get()));
 
         ActivityResultLauncher<Intent> emailActivityResultLauncher = createEmailActivityLauncher(user);
 
@@ -79,6 +79,16 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
     public void registerAccess(View v, OwnUser user) {
         if (presenter.haveBlankFields(user)) {
             Toast.makeText(this, this.getString(R.string.complete_fields), Toast.LENGTH_SHORT).show();
+        }
+        else if (presenter.checkUserLoginExist(user)) {
+            if (presenter.isUserWrong(user, presenter.getUserByLogin(user.login))) {
+                Toast.makeText(this, this.getString(R.string.user_exists), Toast.LENGTH_SHORT).show();
+            } else {
+                Intent i = new Intent(LoginUpRegisterActivity.this, PeopleListActivity.class);
+                i.putExtra("registeredUserID", user.id);
+                startActivity(i);
+            }
+
         }
         else {
             Intent i = new Intent(LoginUpRegisterActivity.this, PeopleListActivity.class);

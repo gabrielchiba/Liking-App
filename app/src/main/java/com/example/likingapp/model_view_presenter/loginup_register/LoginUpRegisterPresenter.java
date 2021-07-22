@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.example.likingapp.models.OwnUser;
 
+import se.emilsjolander.sprinkles.Query;
+
 public class LoginUpRegisterPresenter implements LoginUpRegisterContract.Presenter {
     private LoginUpRegisterContract.View view;
     private Context context;
@@ -27,6 +29,22 @@ public class LoginUpRegisterPresenter implements LoginUpRegisterContract.Present
     @Override
     public void registerOwnUserOnDB(OwnUser ownUser) {
         ownUser.save();
+    }
+
+    @Override
+    public boolean checkUserLoginExist(OwnUser user) {
+        return Query.one(OwnUser.class, " SELECT * FROM own_user WHERE login = '" + user.login + "'", true).get() != null;
+    }
+
+    @Override
+    public boolean isUserWrong(OwnUser user, OwnUser registeredUser) {
+        return !user.name.equals(registeredUser.name) || !user.lastName.equals(registeredUser.lastName) ||
+                !user.password.equals(registeredUser.password);
+    }
+
+    @Override
+    public OwnUser getUserByLogin(String login) {
+        return Query.one(OwnUser.class, " SELECT * FROM own_user WHERE login = '" + login + "'", true).get();
     }
 
 }

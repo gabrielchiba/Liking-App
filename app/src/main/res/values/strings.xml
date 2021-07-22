@@ -26,4 +26,6 @@
     <string name="complete_fields">Complete todos os campos</string>
     <string name="insert_valid_email">Insira um email válido</string>
     <string name="register_button">Cadastrar</string>
+    <string name="user_exists">Usuário já existe</string>
+    <string name="incorrect_phone_format">Telefone Inválido</string>
 </resources>

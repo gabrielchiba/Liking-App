@@ -25,6 +25,19 @@ public class RegisterPersonActivity extends AppCompatActivity implements Registe
         binding.setPerson(person);
 
 
-        binding.buttonAccess.setOnClickListener(v -> Toast.makeText(this, String.valueOf(person.user_id), Toast.LENGTH_SHORT).show());
+        binding.buttonAccess.setOnClickListener(v -> registerPerson(person));
+    }
+
+    @Override
+    public void registerPerson(Person person) {
+        if (presenter.haveBlankFields(person)) {
+            Toast.makeText(this, R.string.complete_fields, Toast.LENGTH_SHORT).show();
+        }
+        else if (presenter.isValidPhoneNumber(person.phone)) {
+            Toast.makeText(this, R.string.incorrect_phone_format, Toast.LENGTH_SHORT).show();
+        }
+        else if (presenter.cpfAlreadyExists(person.cpf)) {
+            //TODO
+        }
     }
 }
