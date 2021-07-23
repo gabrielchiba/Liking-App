@@ -5,6 +5,8 @@ import android.content.Context;
 import com.example.likingapp.models.OwnUser;
 import com.example.likingapp.models.Person;
 
+import se.emilsjolander.sprinkles.Query;
+
 public class RegisterPersonPresenter implements RegisterPersonContract.Presenter{
     private RegisterPersonContract.View view;
     private Context context;
@@ -47,9 +49,16 @@ public class RegisterPersonPresenter implements RegisterPersonContract.Presenter
     }
 
     @Override
-    public boolean cpfAlreadyExists(String cpf) {
-        //TODO
-        return false;
+    public boolean checkPersonDBExists() {
+        return Query.one(Person.class, " SELECT name FROM sqlite_master WHERE type = 'table' AND name= 'person'", true).get() != null;
+    }
+
+    @Override
+    public boolean checkPersonCpfValid(String cpf) {
+        if (checkPersonDBExists()) {
+            return Query.one(Person.class, " SELECT * FROM person WHERE cpf = '" + cpf + "'", true).get() == null;
+        }
+        else return true;
     }
 
 }

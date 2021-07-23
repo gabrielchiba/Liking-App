@@ -14,17 +14,18 @@ import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.likingapp.R;
+import com.example.likingapp.models.Person;
 
 import java.util.List;
 
 public class PeopleRecyclerViewAdapter extends RecyclerView.Adapter<PeopleRecyclerViewAdapter.ViewHolder> {
 
-    private final List<String> mData;
+    private final List<Person> mData;
     private final LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    public PeopleRecyclerViewAdapter(Context context, List<String> data) {
+    public PeopleRecyclerViewAdapter(Context context, List<Person> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -62,7 +63,7 @@ public class PeopleRecyclerViewAdapter extends RecyclerView.Adapter<PeopleRecycl
         }
 
         public void bind(Object obj) {
-            binding.setVariable(BR.obj, obj);
+            binding.setVariable(BR.person, obj);
             binding.executePendingBindings();
         }
 
@@ -73,7 +74,7 @@ public class PeopleRecyclerViewAdapter extends RecyclerView.Adapter<PeopleRecycl
     }
 
     // convenience method for getting data at click position
-    public String getItem(int id) {
+    public Person getItem(int id) {
         return mData.get(id);
     }
 

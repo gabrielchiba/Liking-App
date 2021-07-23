@@ -14,43 +14,39 @@ import android.widget.Toast;
 import com.example.likingapp.R;
 import com.example.likingapp.databinding.ActivityPeopleListBinding;
 import com.example.likingapp.model_view_presenter.register_person.RegisterPersonActivity;
-import com.example.likingapp.models.OwnUser;
+import com.example.likingapp.models.Person;
 import com.example.likingapp.utils.PeopleRecyclerViewAdapter;
 
-import java.util.ArrayList;
-
 import se.emilsjolander.sprinkles.Query;
+
 
 public class PeopleListActivity extends AppCompatActivity implements PeopleListContract.View, PeopleRecyclerViewAdapter.ItemClickListener{
     PeopleRecyclerViewAdapter adapter;
 
     private ActivityPeopleListBinding binding;
     private PeopleListContract.Presenter presenter;
+    private long userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new PeopleListPresenter(this, this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_people_list);
+        userID = getIntent().getLongExtra("registeredUserID", 0);
+
         createFab();
 
-        long userID = getIntent().getLongExtra("registeredUserID", 0);
+        setupRecyclerView();
 //        Log.d("USERID", String.valueOf(userID));
 
-        OwnUser user = Query.one(OwnUser.class, " SELECT * FROM own_user WHERE id = " + userID, true).get();
+//        OwnUser user = Query.one(OwnUser.class, " SELECT * FROM own_user WHERE id = " + userID, true).get();
+    }
 
-        // data to populate the RecyclerView with
-        ArrayList<String> animalNames = new ArrayList<>();
-        animalNames.add("Horse");
-        animalNames.add("Cow");
-        animalNames.add("Camel");
-        animalNames.add("Sheep");
-        animalNames.add("Goat");
-
-        // set up the RecyclerView
+    @Override
+    public void setupRecyclerView() {
         RecyclerView recyclerView = binding.peopleList;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new PeopleRecyclerViewAdapter(this, animalNames);
+        adapter = new PeopleRecyclerViewAdapter(this, presenter.getAllPersonsOfUserFromDB(userID));
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
     }
@@ -64,6 +60,7 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
     public void createFab() {
         binding.fab.setOnClickListener(view -> {
             Intent i = new Intent(PeopleListActivity.this, RegisterPersonActivity.class);
+            i.putExtra("registeredUserID", userID);
             startActivity(i);
         });
     }

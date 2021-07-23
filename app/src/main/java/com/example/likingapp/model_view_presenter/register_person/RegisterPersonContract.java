@@ -14,6 +14,7 @@ public interface RegisterPersonContract {
         void registerPersonOnDB(Person person);
         boolean isValidEmail(CharSequence target);
         boolean isValidPhoneNumber(String phone);
-        boolean cpfAlreadyExists(String cpf);
+        boolean checkPersonDBExists();
+        boolean checkPersonCpfValid(String cpf);
     }
 }
