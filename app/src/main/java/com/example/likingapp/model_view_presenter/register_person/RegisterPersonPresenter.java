@@ -54,7 +54,7 @@ public class RegisterPersonPresenter implements RegisterPersonContract.Presenter
     }
 
     @Override
-    public boolean checkPersonCpfValid(String cpf) {
+    public boolean checkPersonCpfExists(String cpf) {
         if (checkPersonDBExists()) {
             return Query.one(Person.class, " SELECT * FROM person WHERE cpf = '" + cpf + "'", true).get() == null;
         }

@@ -29,6 +29,7 @@
     <string name="user_exists">Usuário Já Existe</string>
     <string name="incorrect_phone_format">Telefone Inválido</string>
     <string name="cpf_invalid">CPF Inválido</string>
+    <string name="cpf_exists">CPF Já Existe</string>
     <string name="success_login">Login Realizado com Sucesso</string>
     <string name="bin">Bin</string>
     <string name="edit">Edit</string>

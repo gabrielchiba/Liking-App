@@ -45,6 +45,11 @@ public class PeopleRecyclerViewAdapter extends RecyclerView.Adapter<PeopleRecycl
         holder.bind(obj);
     }
 
+    public void delete(int position) {
+        mData.remove(position);
+        notifyDataSetChanged();
+    }
+
     // total number of rows
     @Override
     public int getItemCount() {
@@ -54,11 +59,12 @@ public class PeopleRecyclerViewAdapter extends RecyclerView.Adapter<PeopleRecycl
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private final ViewDataBinding binding;
+        private final RecyclerviewPeopleRowBinding binding;
 
-        ViewHolder(ViewDataBinding binding) {
+        ViewHolder(RecyclerviewPeopleRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            binding.imageViewBinIcon.setOnClickListener(v -> delete(getAdapterPosition()));
             binding.getRoot().setOnClickListener(this);
         }
 

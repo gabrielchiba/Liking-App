@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.solver.widgets.Helper;
 import androidx.databinding.DataBindingUtil;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -44,12 +46,20 @@ public class RegisterPersonActivity extends AppCompatActivity implements Registe
         else if (!presenter.isValidEmail(person.email)) {
             Toast.makeText(this, R.string.insert_valid_email, Toast.LENGTH_SHORT).show();
         }
-        else if (!presenter.checkPersonCpfValid(person.cpf)) {
-            Toast.makeText(this, R.string.cpf_invalid, Toast.LENGTH_SHORT).show();
+        else if (!presenter.checkPersonCpfExists(person.cpf)) {
+            Toast.makeText(this, R.string.cpf_exists, Toast.LENGTH_SHORT).show();
         }
         else {
-            person.user_id = userID;
-            presenter.registerPersonOnDB(person);
+            savePerson(person);
         }
+    }
+
+    @Override
+    public void savePerson(Person person) {
+        Intent returnIntent = new Intent();
+        person.user_id = userID;
+        presenter.registerPersonOnDB(person);
+        setResult(Activity.RESULT_OK,returnIntent);
+        finish();
     }
 }

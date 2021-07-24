@@ -1,10 +1,13 @@
 package com.example.likingapp.model_view_presenter.people_list;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 import com.example.likingapp.R;
 import com.example.likingapp.databinding.ActivityPeopleListBinding;
 import com.example.likingapp.model_view_presenter.register_person.RegisterPersonActivity;
+import com.example.likingapp.models.OwnUser;
 import com.example.likingapp.models.Person;
 import com.example.likingapp.utils.PeopleRecyclerViewAdapter;
 
@@ -34,12 +38,25 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
         binding = DataBindingUtil.setContentView(this, R.layout.activity_people_list);
         userID = getIntent().getLongExtra("registeredUserID", 0);
 
-        createFab();
-
         setupRecyclerView();
+
+        ActivityResultLauncher<Intent> personActivityResultLauncher = createPersonActivityLauncher();
+
+        binding.fab.setOnClickListener(view -> registerNewPerson(personActivityResultLauncher));
 //        Log.d("USERID", String.valueOf(userID));
 
 //        OwnUser user = Query.one(OwnUser.class, " SELECT * FROM own_user WHERE id = " + userID, true).get();
+    }
+
+    @Override
+    public ActivityResultLauncher<Intent> createPersonActivityLauncher() {
+        return registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        adapter.notifyDataSetChanged();
+                    }
+                });
     }
 
     @Override
@@ -57,12 +74,10 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
     }
 
     @Override
-    public void createFab() {
-        binding.fab.setOnClickListener(view -> {
-            Intent i = new Intent(PeopleListActivity.this, RegisterPersonActivity.class);
-            i.putExtra("registeredUserID", userID);
-            startActivity(i);
-        });
+    public void registerNewPerson(ActivityResultLauncher<Intent> personActivityResultLauncher) {
+        Intent i = new Intent(PeopleListActivity.this, RegisterPersonActivity.class);
+        i.putExtra("registeredUserID", userID);
+        personActivityResultLauncher.launch(i);
     }
 
 }

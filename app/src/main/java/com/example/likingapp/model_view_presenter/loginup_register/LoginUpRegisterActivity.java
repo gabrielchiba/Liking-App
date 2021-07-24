@@ -68,7 +68,11 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
     public void registerEmail(View v, OwnUser user, ActivityResultLauncher<Intent> emailActivityResultLauncher) {
         if (presenter.haveBlankFields(user)) {
             Toast.makeText(this, this.getString(R.string.complete_fields), Toast.LENGTH_SHORT).show();
-        } else {
+        }
+        else if (presenter.checkUserLoginExist(user)) {
+            Toast.makeText(this, this.getString(R.string.user_exists), Toast.LENGTH_SHORT).show();
+        }
+        else {
             Intent i = new Intent(LoginUpRegisterActivity.this, RegisterEmailActivity.class);
 
             emailActivityResultLauncher.launch(i);

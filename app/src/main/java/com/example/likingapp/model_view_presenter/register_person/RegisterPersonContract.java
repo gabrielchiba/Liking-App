@@ -6,6 +6,7 @@ import com.example.likingapp.models.Person;
 public interface RegisterPersonContract {
     interface View {
         void registerPerson(Person person);
+        void savePerson(Person person);
     }
 
     interface Presenter {
@@ -15,6 +16,6 @@ public interface RegisterPersonContract {
         boolean isValidEmail(CharSequence target);
         boolean isValidPhoneNumber(String phone);
         boolean checkPersonDBExists();
-        boolean checkPersonCpfValid(String cpf);
+        boolean checkPersonCpfExists(String cpf);
     }
 }
