@@ -64,8 +64,12 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
         RecyclerView recyclerView = binding.peopleList;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new PeopleRecyclerViewAdapter(this, presenter.getAllPersonsOfUserFromDB(userID));
+//        Log.d("PERSONS", String.valueOf(presenter.getAllPersonsOfUserFromDB(userID)));
+
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
+
+//        Log.d("ADAPTER", String.valueOf(adapter.getItemCount()));
     }
 
     @Override

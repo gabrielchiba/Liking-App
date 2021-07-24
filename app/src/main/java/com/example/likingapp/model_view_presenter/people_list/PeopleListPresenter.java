@@ -19,8 +19,8 @@ public class PeopleListPresenter implements PeopleListContract.Presenter{
     }
 
     @Override
-    public List<Person> getAllPersonsOfUserFromDB(long id) {
-        CursorList<Person> cursorList = Query.many(Person.class, " SELECT * FROM person WHERE ID = '" + id + "'", true).get();
+    public List<Person> getAllPersonsOfUserFromDB(long userId) {
+        CursorList<Person> cursorList = Query.many(Person.class, " SELECT * FROM person WHERE user_id = '" + userId + "'", true).get();
         List<Person> personList = cursorList.asList();
         cursorList.close();
         return personList;

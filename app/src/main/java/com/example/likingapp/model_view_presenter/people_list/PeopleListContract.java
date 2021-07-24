@@ -16,6 +16,6 @@ public interface PeopleListContract {
     }
 
     interface Presenter {
-        List<Person> getAllPersonsOfUserFromDB(long id);
+        List<Person> getAllPersonsOfUserFromDB(long userId);
     }
 }
