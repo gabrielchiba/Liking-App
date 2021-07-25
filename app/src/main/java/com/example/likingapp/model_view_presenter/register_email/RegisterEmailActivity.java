@@ -37,13 +37,16 @@ public class RegisterEmailActivity extends AppCompatActivity implements Register
     @Override
     public void confirmEmail(View v) {
         String registeredMail = binding.getEmail();
-        if (presenter.isValidEmail(registeredMail)) {
+        if (!presenter.isValidEmail(registeredMail)) {
+            Toast.makeText(this, this.getString(R.string.insert_valid_email), Toast.LENGTH_SHORT).show();
+        }
+        else if (presenter.emailExists(registeredMail)){
+            Toast.makeText(this, this.getString(R.string.email_exists), Toast.LENGTH_SHORT).show();
+        } else {
             Intent returnIntent = new Intent();
             returnIntent.putExtra("registeredMail", registeredMail);
             setResult(Activity.RESULT_OK,returnIntent);
             finish();
-        } else {
-            Toast.makeText(this, this.getString(R.string.insert_valid_email), Toast.LENGTH_SHORT).show();
         }
     }
 }
