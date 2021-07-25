@@ -27,6 +27,7 @@ public class RegisterEmailPresenter implements RegisterEmailContract.Presenter{
     @Override
     public boolean emailExists(String email) {
         String registeredEmail = Query.one(OwnUser.class, " SELECT * FROM own_user WHERE email = '"+email+"'", true).get().email;
-        return email.equals(registeredEmail);
+        if (registeredEmail != null) return registeredEmail.equals(email);
+        else return false;
     }
 }
