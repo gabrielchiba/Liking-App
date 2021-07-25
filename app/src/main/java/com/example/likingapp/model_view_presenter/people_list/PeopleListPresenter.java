@@ -25,4 +25,14 @@ public class PeopleListPresenter implements PeopleListContract.Presenter{
         cursorList.close();
         return personList;
     }
+
+    @Override
+    public Person getOnePersonOfUserFromDB(long id) {
+        return Query.one(Person.class, " SELECT * FROM person WHERE id = '" + id + "'", true).get();
+    }
+
+    @Override
+    public void removePersonFromDB(Person person) {
+        person.delete();
+    }
 }

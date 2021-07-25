@@ -24,12 +24,18 @@ import com.example.likingapp.utils.PeopleRecyclerViewAdapter;
 import se.emilsjolander.sprinkles.Query;
 
 
-public class PeopleListActivity extends AppCompatActivity implements PeopleListContract.View, PeopleRecyclerViewAdapter.ItemClickListener{
+public class PeopleListActivity extends AppCompatActivity implements PeopleListContract.View, PeopleRecyclerViewAdapter.ItemActionListener{
     PeopleRecyclerViewAdapter adapter;
+    ActivityResultLauncher<Intent> personActivityResultLauncher;
 
     private ActivityPeopleListBinding binding;
     private PeopleListContract.Presenter presenter;
+
+    // Foreign Key Reference
     private long userID;
+
+    // Flag to update
+    private boolean isUpdate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +46,10 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
 
         setupRecyclerView();
 
-        ActivityResultLauncher<Intent> personActivityResultLauncher = createPersonActivityLauncher();
+        personActivityResultLauncher = createPersonActivityLauncher();
 
-        binding.fab.setOnClickListener(view -> registerNewPerson(personActivityResultLauncher));
+        binding.fab.setOnClickListener(view -> registerNewPerson(0, false));
 //        Log.d("USERID", String.valueOf(userID));
-
-//        OwnUser user = Query.one(OwnUser.class, " SELECT * FROM own_user WHERE id = " + userID, true).get();
     }
 
     @Override
@@ -54,7 +58,13 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == Activity.RESULT_OK) {
-                        adapter.notifyDataSetChanged();
+                        Intent data = result.getData();
+                        assert data != null;
+                        long id = data.getLongExtra("registeredPersonID", 0);
+
+                        if (!isUpdate) {
+                            adapter.add(adapter.getItemCount(), presenter.getOnePersonOfUserFromDB(id));
+                        }
                     }
                 });
     }
@@ -64,24 +74,36 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
         RecyclerView recyclerView = binding.peopleList;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new PeopleRecyclerViewAdapter(this, presenter.getAllPersonsOfUserFromDB(userID));
-//        Log.d("PERSONS", String.valueOf(presenter.getAllPersonsOfUserFromDB(userID)));
-
-        adapter.setClickListener(this);
+        adapter.setActionListener(this);
         recyclerView.setAdapter(adapter);
-
-//        Log.d("ADAPTER", String.valueOf(adapter.getItemCount()));
     }
 
     @Override
-    public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+    public void updateElement(int position, long id) {
+        adapter.update(position, presenter.getOnePersonOfUserFromDB(id));
     }
 
     @Override
-    public void registerNewPerson(ActivityResultLauncher<Intent> personActivityResultLauncher) {
+    public void registerNewPerson(long id, boolean isUpdate) {
+        // Set if is update
+        this.isUpdate = isUpdate;
         Intent i = new Intent(PeopleListActivity.this, RegisterPersonActivity.class);
         i.putExtra("registeredUserID", userID);
+        i.putExtra("editPersonID", id);
         personActivityResultLauncher.launch(i);
     }
+
+    @Override
+    public void deleteItem(int position) {
+        presenter.removePersonFromDB(adapter.getItem(position));
+        adapter.remove(position);
+    }
+
+    @Override
+    public void editItem(int position) {
+        registerNewPerson(adapter.getItem(position).id, true);
+        updateElement(position, adapter.getItem(position).id);
+    }
+
 
 }

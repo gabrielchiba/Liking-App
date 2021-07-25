@@ -39,13 +39,15 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
 
         binding.setUser(user);
 
+//        Log.d("ID" , String.valueOf(user.id));
+
 //        Log.d("SQL", String.valueOf(Query.one(OwnUser.class, " SELECT * FROM own_user WHERE name = '"+name+"'", true).get()));
 
-        ActivityResultLauncher<Intent> emailActivityResultLauncher = createEmailActivityLauncher(user);
+        ActivityResultLauncher<Intent> emailActivityResultLauncher = createEmailActivityLauncher(binding.getUser());
 
-        binding.buttonRegister.setOnClickListener(v -> registerEmail(v, user, emailActivityResultLauncher));
-        binding.buttonApi.setOnClickListener(v -> apiAccess(v, user));
-        binding.buttonAccess.setOnClickListener(v -> registerAccess(v, user));
+        binding.buttonRegister.setOnClickListener(v -> registerEmail(v, binding.getUser(), emailActivityResultLauncher));
+        binding.buttonApi.setOnClickListener(v -> apiAccess(v, binding.getUser()));
+        binding.buttonAccess.setOnClickListener(v -> registerAccess(v, binding.getUser()));
 
     }
 
@@ -96,8 +98,7 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
 
         }
         else {
-            Intent i = new Intent(LoginUpRegisterActivity.this, PeopleListActivity.class);
-            startActivity(i);
+            Toast.makeText(this, R.string.user_dont_exist, Toast.LENGTH_SHORT).show();
         }
 
     }

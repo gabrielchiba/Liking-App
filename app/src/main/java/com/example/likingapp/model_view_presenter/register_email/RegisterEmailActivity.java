@@ -42,6 +42,9 @@ public class RegisterEmailActivity extends AppCompatActivity implements Register
             returnIntent.putExtra("registeredMail", registeredMail);
             setResult(Activity.RESULT_OK,returnIntent);
             finish();
+        }
+        else if (presenter.emailExists(registeredMail)){
+            Toast.makeText(this, this.getString(R.string.insert_valid_email), Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, this.getString(R.string.insert_valid_email), Toast.LENGTH_SHORT).show();
         }

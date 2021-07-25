@@ -228,7 +228,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     android:text="@={person.cpf}"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -256,7 +256,7 @@
                     android:layout_weight="0"
                     android:ems="10"
                     android:hint="@string/email"
-                    android:inputType="textPersonName"
+                    android:inputType="textEmailAddress"
                     android:text="@={person.email}"
                     android:textSize="14sp" />
             </LinearLayout>

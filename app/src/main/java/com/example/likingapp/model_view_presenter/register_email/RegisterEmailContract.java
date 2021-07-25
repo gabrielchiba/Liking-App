@@ -10,5 +10,6 @@ public interface RegisterEmailContract {
 
     interface Presenter {
         boolean isValidEmail(CharSequence target);
+        boolean emailExists(String email);
     }
 }

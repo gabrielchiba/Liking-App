@@ -5,15 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.databinding.DataBindingUtil;
-
 import com.example.likingapp.BR;
 import com.example.likingapp.databinding.RecyclerviewPeopleRowBinding;
 
-import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.likingapp.R;
 import com.example.likingapp.models.Person;
 
 import java.util.List;
@@ -22,15 +18,13 @@ public class PeopleRecyclerViewAdapter extends RecyclerView.Adapter<PeopleRecycl
 
     private final List<Person> mData;
     private final LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
+    private ItemActionListener mActionListener;
 
-    // data is passed into the constructor
     public PeopleRecyclerViewAdapter(Context context, List<Person> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
 
-    // inflates the row layout from xml when needed
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerviewPeopleRowBinding recyclerviewPeopleRowBinding =
@@ -38,59 +32,66 @@ public class PeopleRecyclerViewAdapter extends RecyclerView.Adapter<PeopleRecycl
         return new ViewHolder(recyclerviewPeopleRowBinding);
     }
 
-    // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Object obj = mData.get(position);
         holder.bind(obj);
     }
 
-    public void delete(int position) {
-        mData.remove(position);
-        notifyDataSetChanged();
-    }
-
-    // total number of rows
+    // Return total number of elements on list
     @Override
     public int getItemCount() {
         return mData.size();
     }
 
 
-    // stores and recycles views as they are scrolled off screen
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private final RecyclerviewPeopleRowBinding binding;
 
         ViewHolder(RecyclerviewPeopleRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.imageViewBinIcon.setOnClickListener(v -> delete(getAdapterPosition()));
-            binding.getRoot().setOnClickListener(this);
+            binding.imageViewBinIcon.setOnClickListener(v -> mActionListener.deleteItem(getAdapterPosition()));
+            binding.imageViewEditIcon.setOnClickListener(v -> mActionListener.editItem(getAdapterPosition()));
         }
 
         public void bind(Object obj) {
             binding.setVariable(BR.person, obj);
             binding.executePendingBindings();
         }
-
-        @Override
-        public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-        }
     }
 
-    // convenience method for getting data at click position
+    // Helper function to return element by position
     public Person getItem(int id) {
         return mData.get(id);
     }
 
-    // allows clicks events to be caught
-    public void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
+    // Helper function to add elements
+    public void add(int position, Person person) {
+        mData.add(position, person);
+        notifyDataSetChanged();
     }
 
-    // parent activity will implement this method to respond to click events
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
+    // Helper function to remove elements
+    public void remove(int position) {
+        mData.remove(position);
+        notifyDataSetChanged();
+    }
+
+    // Helper function to update elements
+    public void update(int position, Person person) {
+        mData.set(position, person);
+        notifyDataSetChanged();
+    }
+
+    // Interface for delete and edit functions
+    public interface ItemActionListener {
+        void deleteItem(int position);
+        void editItem(int position);
+    }
+
+    // Bind ActionListener
+    public void setActionListener(ItemActionListener itemActionListener) {
+        this.mActionListener = itemActionListener;
     }
 }

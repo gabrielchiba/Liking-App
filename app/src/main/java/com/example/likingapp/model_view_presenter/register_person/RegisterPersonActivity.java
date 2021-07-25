@@ -19,7 +19,12 @@ public class RegisterPersonActivity extends AppCompatActivity implements Registe
 
     private ActivityRegisterPersonBinding binding;
     private RegisterPersonContract.Presenter presenter;
+
+    // Foreign Key user reference
     private long userID;
+
+    // Existent Person element id reference
+    private long personID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +32,17 @@ public class RegisterPersonActivity extends AppCompatActivity implements Registe
         presenter = new RegisterPersonPresenter(this, this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register_person);
 
+        // Create new empty person
         Person person = presenter.createNewEmptyPerson();
         binding.setPerson(person);
 
         userID = getIntent().getLongExtra("registeredUserID", 0);
 
-        binding.buttonAccess.setOnClickListener(v -> registerPerson(person));
+        personID = getIntent().getLongExtra("editPersonID", 0);
+
+        if (personID != 0) editPerson(personID);
+
+        binding.buttonAccess.setOnClickListener(v -> registerPerson(binding.getPerson()));
     }
 
     @Override
@@ -46,20 +56,39 @@ public class RegisterPersonActivity extends AppCompatActivity implements Registe
         else if (!presenter.isValidEmail(person.email)) {
             Toast.makeText(this, R.string.insert_valid_email, Toast.LENGTH_SHORT).show();
         }
-        else if (!presenter.checkPersonCpfExists(person.cpf)) {
+        else if (presenter.checkPersonCpfExists(person)) {
             Toast.makeText(this, R.string.cpf_exists, Toast.LENGTH_SHORT).show();
         }
         else {
+            Toast.makeText(this, ""+person.exists(), Toast.LENGTH_SHORT).show();
             savePerson(person);
         }
     }
 
     @Override
     public void savePerson(Person person) {
-        Intent returnIntent = new Intent();
         person.user_id = userID;
         presenter.registerPersonOnDB(person);
+        returnRegisteredPersonID(person);
+    }
+
+    @Override
+    public void returnRegisteredPersonID(Person person) {
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("registeredPersonID", person.id);
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
     }
+
+    @Override
+    public void initiatePreviousValues(Person person) {
+        binding.setPerson(person);
+    }
+
+    @Override
+    public void editPerson(long id) {
+        Person person = presenter.getOnePersonOfUserFromDB(id);
+        initiatePreviousValues(person);
+    }
+
 }

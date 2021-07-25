@@ -49,16 +49,25 @@ public class RegisterPersonPresenter implements RegisterPersonContract.Presenter
     }
 
     @Override
+    public boolean isSameUser(long newId, long registeredId) {
+        return newId == registeredId;
+    }
+
+    @Override
     public boolean checkPersonDBExists() {
         return Query.one(Person.class, " SELECT name FROM sqlite_master WHERE type = 'table' AND name= 'person'", true).get() != null;
     }
 
     @Override
-    public boolean checkPersonCpfExists(String cpf) {
-        if (checkPersonDBExists()) {
-            return Query.one(Person.class, " SELECT * FROM person WHERE cpf = '" + cpf + "'", true).get() == null;
-        }
-        else return true;
+    public boolean checkPersonCpfExists(Person person) {
+        Person newPerson = Query.one(Person.class, " SELECT * FROM person WHERE cpf = '" + person.cpf + "'", true).get();
+
+        return (newPerson != null && !isSameUser(newPerson.id, person.id));
+    }
+
+    @Override
+    public Person getOnePersonOfUserFromDB(long id) {
+        return Query.one(Person.class, " SELECT * FROM person WHERE id = '" + id + "'", true).get();
     }
 
 }

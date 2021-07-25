@@ -2,6 +2,10 @@ package com.example.likingapp.model_view_presenter.register_email;
 
 import android.content.Context;
 
+import com.example.likingapp.models.OwnUser;
+
+import se.emilsjolander.sprinkles.Query;
+
 public class RegisterEmailPresenter implements RegisterEmailContract.Presenter{
     private RegisterEmailContract.View view;
     private Context context;
@@ -18,5 +22,11 @@ public class RegisterEmailPresenter implements RegisterEmailContract.Presenter{
         } else {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
         }
+    }
+
+    @Override
+    public boolean emailExists(String email) {
+        String registeredEmail = Query.one(OwnUser.class, " SELECT * FROM own_user WHERE email = '"+email+"'", true).get().email;
+        return email.equals(registeredEmail);
     }
 }
