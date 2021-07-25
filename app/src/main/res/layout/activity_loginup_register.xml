@@ -30,6 +30,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:orientation="vertical">
 
             <TextView
@@ -53,8 +55,15 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/name"
-                    android:text="@={user.name}"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:text="@={user.name}" />
+
+                <View
+                    android:id="@+id/divider4"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless" />
 
                 <EditText
                     android:id="@+id/editTextLastName"
@@ -63,8 +72,8 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/surname"
-                    android:text="@={user.lastName}"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:text="@={user.lastName}" />
             </LinearLayout>
 
             <TextView
@@ -83,8 +92,8 @@
                 android:layout_weight="0"
                 android:ems="10"
                 android:hint="@string/log_in"
-                android:text="@={user.login}"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:text="@={user.login}" />
 
             <TextView
                 android:id="@+id/textViewPassword"
@@ -102,8 +111,8 @@
                 android:layout_weight="0"
                 android:ems="10"
                 android:hint="@string/password"
-                android:text="@={user.password}"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:text="@={user.password}" />
 
             <CheckBox
                 android:id="@+id/checkBox"
@@ -111,19 +120,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3sp"
                 android:layout_weight="0"
-                android:text="@string/checkbox_save_info"
-                android:checked="@={user.saveCredentials}"/>
+                android:checked="@={user.saveCredentials}"
+                android:text="@string/checkbox_save_info" />
 
             <Button
                 android:id="@+id/buttonRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="150sp"
+                android:layout_gravity="center"
                 android:layout_marginTop="10sp"
                 android:layout_marginBottom="3sp"
                 android:layout_weight="0"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:gravity="center"
                 android:text="@string/register"
                 android:textAllCaps="false" />
 
@@ -161,18 +169,22 @@
 
             <Button
                 android:id="@+id/buttonAccess"
+                style="@style/MyButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3sp"
                 android:layout_weight="0"
+                android:fontFamily="@font/montserrat_semi_bold"
                 android:text="@string/acess_register" />
 
             <Button
                 android:id="@+id/buttonApi"
+                style="@style/MyButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3sp"
                 android:layout_weight="0"
+                android:fontFamily="@font/montserrat_semi_bold"
                 android:text="@string/acess_gallery" />
         </LinearLayout>
 
