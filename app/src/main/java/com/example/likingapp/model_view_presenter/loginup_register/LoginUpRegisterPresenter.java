@@ -17,8 +17,15 @@ public class LoginUpRegisterPresenter implements LoginUpRegisterContract.Present
 
     @Override
     public boolean haveBlankFields(OwnUser user) {
-        return user.name==null || user.lastName==null ||
-                user.login==null || user.password==null;
+        return (isNullOrEmpty(user.name, user.lastName, user.login, user.password));
+    }
+
+    @Override
+    public boolean isNullOrEmpty(String... values) {
+        for (String v: values)
+            if(v == null || v.isEmpty())
+                return true;
+            return false;
     }
 
     @Override

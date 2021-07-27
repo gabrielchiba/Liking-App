@@ -150,17 +150,21 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="0"
                         android:orientation="horizontal">
 
-                        <EditText
+                        <mk.webfactory.dz.maskededittext.MaskedEditText
                             android:id="@+id/editTextBirthday"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:ems="10"
                             android:inputType="date"
+                            android:hint="@string/date_hint"
                             android:text="@={person.birthday}"
+                            android:gravity="center"
+                            app:maskededittext_enforceMaskLength="true"
+                            app:maskededittext_mask="##/##/####"
+                            app:maskededittext_maskCharacter="#"
                             android:textSize="14sp" />
 
                         <ImageView
@@ -194,7 +198,7 @@
                         android:text="@string/phone_number"
                         android:textSize="12sp" />
 
-                    <EditText
+                    <mk.webfactory.dz.maskededittext.MaskedEditText
                         android:id="@+id/editTextPersonPhone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -202,6 +206,10 @@
                         android:ems="10"
                         android:inputType="phone"
                         android:text="@={person.phone}"
+                        android:hint="@string/phone_hint"
+                        app:maskededittext_enforceMaskLength="true"
+                        app:maskededittext_mask="## #####-####"
+                        app:maskededittext_maskCharacter="#"
                         android:textSize="14sp" />
 
                 </LinearLayout>
@@ -224,7 +232,7 @@
                     android:text="@string/cpf"
                     android:textSize="12sp" />
 
-                <EditText
+                <mk.webfactory.dz.maskededittext.MaskedEditText
                     android:id="@+id/editTextCpf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -232,6 +240,10 @@
                     android:ems="10"
                     android:inputType="number"
                     android:text="@={person.cpf}"
+                    android:hint="@string/cpf_hint"
+                    app:maskededittext_enforceMaskLength="true"
+                    app:maskededittext_mask="###.###.###-##"
+                    app:maskededittext_maskCharacter="#"
                     android:textSize="14sp" />
             </LinearLayout>
 

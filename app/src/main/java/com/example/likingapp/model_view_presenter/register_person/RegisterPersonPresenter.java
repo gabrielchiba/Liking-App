@@ -28,9 +28,15 @@ public class RegisterPersonPresenter implements RegisterPersonContract.Presenter
 
     @Override
     public boolean haveBlankFields(Person person) {
-        return person.name==null || person.lastName==null ||
-                person.birthday==null || person.phone==null ||
-                person.cpf==null || person.email==null;
+        return (isNullOrEmpty(person.name, person.lastName, person.birthday, person.phone, person.cpf, person.email));
+    }
+
+    @Override
+    public boolean isNullOrEmpty(String... values) {
+        for (String v: values)
+            if(v == null || v.isEmpty())
+                return true;
+        return false;
     }
 
     @Override

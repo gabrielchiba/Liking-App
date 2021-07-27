@@ -15,6 +15,7 @@ public interface RegisterPersonContract {
     interface Presenter {
         Person createNewEmptyPerson();
         boolean haveBlankFields(Person person);
+        boolean isNullOrEmpty(String... values);
         void registerPersonOnDB(Person person);
         boolean isValidEmail(CharSequence target);
         boolean isValidPhoneNumber(String phone);

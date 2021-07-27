@@ -17,6 +17,7 @@ public interface LoginUpRegisterContract {
 
     interface Presenter {
         boolean haveBlankFields(OwnUser user);
+        boolean isNullOrEmpty(String... values);
         OwnUser createNewEmptyOwnUser();
         void registerOwnUserOnDB(OwnUser ownUser);
         boolean checkUserLoginExist(OwnUser user);
