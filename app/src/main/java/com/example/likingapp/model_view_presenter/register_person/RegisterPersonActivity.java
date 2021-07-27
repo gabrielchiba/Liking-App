@@ -5,9 +5,11 @@ import androidx.constraintlayout.solver.widgets.Helper;
 import androidx.databinding.DataBindingUtil;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.example.likingapp.R;
@@ -15,7 +17,11 @@ import com.example.likingapp.databinding.ActivityRegisterPersonBinding;
 import com.example.likingapp.models.OwnUser;
 import com.example.likingapp.models.Person;
 
-public class RegisterPersonActivity extends AppCompatActivity implements RegisterPersonContract.View{
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+public class RegisterPersonActivity extends AppCompatActivity implements RegisterPersonContract.View, DatePickerDialog.OnDateSetListener{
 
     private ActivityRegisterPersonBinding binding;
     private RegisterPersonContract.Presenter presenter;
@@ -43,6 +49,8 @@ public class RegisterPersonActivity extends AppCompatActivity implements Registe
         if (personID != 0) editPerson(personID);
 
         binding.buttonAccess.setOnClickListener(v -> registerPerson(binding.getPerson()));
+
+        binding.imageViewCalendar.setOnClickListener(v -> showCalendar());
     }
 
     @Override
@@ -86,9 +94,34 @@ public class RegisterPersonActivity extends AppCompatActivity implements Registe
     }
 
     @Override
+    public void showCalendar() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this, this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONDAY),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//        String myFormat = "dd/MM/yyyy"; //In which you need put here
+//        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        String date = "" + dayOfMonth + "0" + month + year;
+        binding.editTextBirthday.setText(date);
+    }
+
+    @Override
+    public void updateBirthdayLabel(Calendar calendar) {
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        binding.editTextBirthday.setText(sdf.format(calendar.getTime()));
+    }
+
+    @Override
     public void editPerson(long id) {
         Person person = presenter.getOnePersonOfUserFromDB(id);
         initiatePreviousValues(person);
     }
-
 }

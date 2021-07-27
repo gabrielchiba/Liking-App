@@ -3,6 +3,8 @@ package com.example.likingapp.model_view_presenter.register_person;
 import com.example.likingapp.models.OwnUser;
 import com.example.likingapp.models.Person;
 
+import java.util.Calendar;
+
 public interface RegisterPersonContract {
     interface View {
         void registerPerson(Person person);
@@ -10,6 +12,8 @@ public interface RegisterPersonContract {
         void returnRegisteredPersonID(Person person);
         void editPerson(long id);
         void initiatePreviousValues(Person person);
+        void showCalendar();
+        void updateBirthdayLabel(Calendar calendar);
     }
 
     interface Presenter {
