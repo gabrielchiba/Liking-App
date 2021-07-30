@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="name"
+            type="String" />
+        <variable
+            name="description"
+            type="String" />
+        <variable
+            name="items"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="51dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/avatar"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:text="@={name}" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@={description}"
+                android:textColor="@color/light_gray"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@={items}"
+                android:textColor="@color/light_gray"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageViewEditIcon2"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/edit"
+                app:srcCompat="@drawable/edit" />
+
+            <View
+                android:id="@+id/divider6"
+                android:layout_width="15dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="?attr/listChoiceBackgroundIndicator" />
+
+            <ImageView
+                android:id="@+id/imageViewBinIcon2"
+                android:layout_width="32dp"
+                android:layout_height="29dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/bin"
+                app:srcCompat="@drawable/bin" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>
