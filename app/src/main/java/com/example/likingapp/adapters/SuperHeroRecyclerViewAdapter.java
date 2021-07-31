@@ -1,6 +1,7 @@
 package com.example.likingapp.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -10,6 +11,7 @@ import com.example.likingapp.BR;
 import com.example.likingapp.databinding.RecyclerviewSuperheroRowBinding;
 import com.example.likingapp.models.Hero;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SuperHeroRecyclerViewAdapter extends RecyclerView.Adapter<SuperHeroRecyclerViewAdapter.ViewHolder>{
@@ -79,6 +81,36 @@ public class SuperHeroRecyclerViewAdapter extends RecyclerView.Adapter<SuperHero
     public void update(int position, Hero character) {
         mData.set(position, character);
         notifyDataSetChanged();
+    }
+
+    //Helper function to filter elements
+    public List<Hero> filter(String queryText)
+    {
+        List<Hero> copyList = new ArrayList<>();
+
+        Log.d("DATA", String.valueOf(copyList));
+
+        if(queryText.isEmpty())
+        {
+            copyList.addAll(mData);
+        }
+        else
+        {
+
+            for(Hero hero: mData)
+            {
+                if(hero.getName().toLowerCase().contains(queryText.toLowerCase()))
+                {
+                    copyList.add(hero);
+                }
+            }
+
+        }
+        Log.d("DATA", String.valueOf(copyList));
+        Log.d("DATA", String.valueOf(mData));
+        notifyDataSetChanged();
+        return copyList;
+
     }
 
     // Interface for delete and edit functions

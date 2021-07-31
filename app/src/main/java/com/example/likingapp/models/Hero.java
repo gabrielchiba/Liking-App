@@ -1,6 +1,8 @@
 package com.example.likingapp.models;
 
-public class Hero {
+import se.emilsjolander.sprinkles.Model;
+
+public class Hero extends Model implements Cloneable {
     private int id;
     private String name;
     private String description;
@@ -11,6 +13,32 @@ public class Hero {
     private Content series;
     private Content stories;
     private Content events;
+
+    public Hero() {
+        this.id = 0;
+        this.name = "Name";
+        this.description = "Some Description here";
+        this.modified = "";
+        this.thumbnail = null;
+        this.resourceURI = "";
+        this.comics = null;
+        this.series = null;
+        this.stories = null;
+        this.events = null;
+    }
+
+    public Hero(Hero hero) {
+        this.id = hero.id;
+        this.name = hero.name;
+        this.description = hero.description;
+        this.modified = hero.modified;
+        this.thumbnail = hero.thumbnail;
+        this.resourceURI = hero.resourceURI;
+        this.comics = hero.comics;
+        this.series = hero.series;
+        this.stories = hero.stories;
+        this.events = hero.events;
+    }
 
     public Hero(int id, String name, String description, String modified, Thumbnail thumbnail,
                 String resourceURI, Content comics, Content series, Content stories, Content events) {
@@ -24,6 +52,17 @@ public class Hero {
         this.series = series;
         this.stories = stories;
         this.events = events;
+    }
+
+    @Override
+    public Hero clone(){
+        Hero hero = null;
+        try {
+            hero = (Hero) super.clone();
+        }catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return hero;
     }
 
     public int getId() {

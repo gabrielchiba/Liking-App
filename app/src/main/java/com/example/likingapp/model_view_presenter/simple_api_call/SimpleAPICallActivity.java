@@ -1,6 +1,7 @@
 package com.example.likingapp.model_view_presenter.simple_api_call;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +24,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAPICallContract.View, SuperHeroRecyclerViewAdapter.ItemActionListener{
+public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAPICallContract.View,
+        SearchView.OnQueryTextListener, SuperHeroRecyclerViewAdapter.ItemActionListener{
 
     private ActivitySimpleApicallBinding binding;
     private SimpleAPICallContract.Presenter presenter;
@@ -44,6 +46,10 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
         if (email != null) binding.setEmail(email);
 
         getSuperHeroes();
+
+        binding.searchView.setQueryHint("Search");
+        binding.searchView.setOnQueryTextListener(this);
+        binding.searchView.setIconifiedByDefault(false);
     }
 
     @Override
@@ -82,5 +88,17 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
     @Override
     public void editItem(int position) {
 
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        Toast.makeText(this, "Texto enviado", Toast.LENGTH_SHORT).show();
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        setupRecyclerView(adapter.filter(newText));
+        return true;
     }
 }
