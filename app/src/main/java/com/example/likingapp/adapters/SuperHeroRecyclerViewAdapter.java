@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,14 +16,16 @@ import com.example.likingapp.models.Hero;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SuperHeroRecyclerViewAdapter extends RecyclerView.Adapter<SuperHeroRecyclerViewAdapter.ViewHolder>{
+public class SuperHeroRecyclerViewAdapter extends RecyclerView.Adapter<SuperHeroRecyclerViewAdapter.ViewHolder> implements Filterable {
     private final List<Hero> mData;
+    private final List<Hero> mDataFull;
     private final LayoutInflater mInflater;
     private SuperHeroRecyclerViewAdapter.ItemActionListener mActionListener;
 
     public SuperHeroRecyclerViewAdapter(Context context, List<Hero> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
+        this.mDataFull = new ArrayList<>(data);
     }
 
     @Override
@@ -42,6 +46,41 @@ public class SuperHeroRecyclerViewAdapter extends RecyclerView.Adapter<SuperHero
     public int getItemCount() {
         return mData.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return mDataFilter;
+    }
+
+    // Helper function to filter elements
+    private Filter mDataFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Hero> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(mDataFull);
+            } else {
+                String filterText = constraint.toString().toLowerCase().trim();
+
+                for (Hero hero: mDataFull) {
+                    if (hero.getName().toLowerCase().contains(filterText)) {
+                        filteredList.add(hero);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mData.clear();
+            mData.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -81,36 +120,6 @@ public class SuperHeroRecyclerViewAdapter extends RecyclerView.Adapter<SuperHero
     public void update(int position, Hero character) {
         mData.set(position, character);
         notifyDataSetChanged();
-    }
-
-    //Helper function to filter elements
-    public List<Hero> filter(String queryText)
-    {
-        List<Hero> copyList = new ArrayList<>();
-
-        Log.d("DATA", String.valueOf(copyList));
-
-        if(queryText.isEmpty())
-        {
-            copyList.addAll(mData);
-        }
-        else
-        {
-
-            for(Hero hero: mData)
-            {
-                if(hero.getName().toLowerCase().contains(queryText.toLowerCase()))
-                {
-                    copyList.add(hero);
-                }
-            }
-
-        }
-        Log.d("DATA", String.valueOf(copyList));
-        Log.d("DATA", String.valueOf(mData));
-        notifyDataSetChanged();
-        return copyList;
-
     }
 
     // Interface for delete and edit functions

@@ -7,6 +7,7 @@ import java.util.List;
 public interface SimpleAPICallContract {
     interface View {
         void setupRecyclerView(List<Hero> heroes);
+        void setupSearchView();
     }
 
     interface Presenter {

@@ -2,7 +2,7 @@ package com.example.likingapp.models;
 
 import se.emilsjolander.sprinkles.Model;
 
-public class Hero extends Model implements Cloneable {
+public class Hero {
     private int id;
     private String name;
     private String description;
@@ -13,19 +13,6 @@ public class Hero extends Model implements Cloneable {
     private Content series;
     private Content stories;
     private Content events;
-
-    public Hero() {
-        this.id = 0;
-        this.name = "Name";
-        this.description = "Some Description here";
-        this.modified = "";
-        this.thumbnail = null;
-        this.resourceURI = "";
-        this.comics = null;
-        this.series = null;
-        this.stories = null;
-        this.events = null;
-    }
 
     public Hero(Hero hero) {
         this.id = hero.id;
@@ -52,17 +39,6 @@ public class Hero extends Model implements Cloneable {
         this.series = series;
         this.stories = stories;
         this.events = events;
-    }
-
-    @Override
-    public Hero clone(){
-        Hero hero = null;
-        try {
-            hero = (Hero) super.clone();
-        }catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-        return hero;
     }
 
     public int getId() {

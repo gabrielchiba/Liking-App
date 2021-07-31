@@ -47,9 +47,8 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
 
         getSuperHeroes();
 
-        binding.searchView.setQueryHint("Search");
-        binding.searchView.setOnQueryTextListener(this);
-        binding.searchView.setIconifiedByDefault(false);
+        setupSearchView();
+
     }
 
     @Override
@@ -59,6 +58,13 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
         adapter = new SuperHeroRecyclerViewAdapter(this, heroes);
         adapter.setActionListener(this);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void setupSearchView() {
+        binding.searchView.setQueryHint("Search");
+        binding.searchView.setOnQueryTextListener(this);
+        binding.searchView.setIconifiedByDefault(false);
     }
 
     private void getSuperHeroes() {
@@ -93,12 +99,12 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
     @Override
     public boolean onQueryTextSubmit(String query) {
         Toast.makeText(this, "Texto enviado", Toast.LENGTH_SHORT).show();
-        return true;
+        return false;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        setupRecyclerView(adapter.filter(newText));
-        return true;
+        adapter.getFilter().filter(newText);
+        return false;
     }
 }
