@@ -3,6 +3,7 @@ package com.example.likingapp.model_view_presenter.people_list;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.likingapp.R;
 import com.example.likingapp.databinding.ActivityPeopleListBinding;
@@ -17,7 +19,8 @@ import com.example.likingapp.model_view_presenter.register_person.RegisterPerson
 import com.example.likingapp.adapters.PeopleRecyclerViewAdapter;
 
 
-public class PeopleListActivity extends AppCompatActivity implements PeopleListContract.View, PeopleRecyclerViewAdapter.ItemActionListener{
+public class PeopleListActivity extends AppCompatActivity implements PeopleListContract.View,
+        SearchView.OnQueryTextListener, PeopleRecyclerViewAdapter.ItemActionListener{
     PeopleRecyclerViewAdapter adapter;
     ActivityResultLauncher<Intent> personActivityResultLauncher;
 
@@ -39,10 +42,11 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
 
         setupRecyclerView();
 
+        setupSearchView();
+
         personActivityResultLauncher = createPersonActivityLauncher();
 
         binding.fab.setOnClickListener(view -> registerNewPerson(0, false));
-//        Log.d("USERID", String.valueOf(userID));
     }
 
     @Override
@@ -77,6 +81,12 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
     }
 
     @Override
+    public void setupSearchView() {
+        binding.searchView2.setOnQueryTextListener(this);
+        binding.searchView2.setIconifiedByDefault(false);
+    }
+
+    @Override
     public void registerNewPerson(long id, boolean isUpdate) {
         // Set if is update
         this.isUpdate = isUpdate;
@@ -99,4 +109,15 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
     }
 
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        Toast.makeText(this, "Texto enviado", Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        adapter.getFilter().filter(newText);
+        return false;
+    }
 }

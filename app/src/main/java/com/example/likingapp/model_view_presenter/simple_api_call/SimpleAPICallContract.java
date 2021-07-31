@@ -8,6 +8,7 @@ public interface SimpleAPICallContract {
     interface View {
         void setupRecyclerView(List<Hero> heroes);
         void setupSearchView();
+        void setExtras();
     }
 
     interface Presenter {

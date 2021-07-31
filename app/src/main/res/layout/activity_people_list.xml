@@ -45,17 +45,17 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:background="@color/white"
+                android:layout_marginEnd="10dp"
                 android:gravity="center_horizontal"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme">
 
-                <SearchView
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchView2"
                     android:layout_width="match_parent"
                     android:layout_height="36dp"
                     android:layout_marginTop="10sp"
-                    android:background="@android:color/transparent"
+                    android:background="@color/light_bright_gray"
                     android:iconifiedByDefault="false"
                     android:queryHint="@string/search" />
             </androidx.appcompat.widget.Toolbar>

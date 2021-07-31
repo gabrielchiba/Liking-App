@@ -14,6 +14,7 @@ public interface PeopleListContract {
         ActivityResultLauncher<Intent> createPersonActivityLauncher();
         void setupRecyclerView();
         void updateElement(int position, long id);
+        void setupSearchView();
     }
 
     interface Presenter {
