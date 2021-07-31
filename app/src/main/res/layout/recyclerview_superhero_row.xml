@@ -5,14 +5,8 @@
 
     <data>
         <variable
-            name="name"
-            type="String" />
-        <variable
-            name="description"
-            type="String" />
-        <variable
-            name="items"
-            type="String" />
+            name="hero"
+            type="com.example.likingapp.models.Hero" />
     </data>
 
     <LinearLayout
@@ -37,24 +31,24 @@
 
             <TextView
                 android:id="@+id/textView8"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_semi_bold"
-                android:text="@={name}" />
+                android:text="@={hero.name}" />
 
             <TextView
                 android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@={description}"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:text="@={hero.description}"
                 android:textColor="@color/light_gray"
                 android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/textView11"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="@={items}"
+                android:text="@={hero.modified}"
                 android:textColor="@color/light_gray"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -62,14 +56,14 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageViewEditIcon2"
-                android:layout_width="32dp"
-                android:layout_height="29dp"
+                android:layout_width="26dp"
+                android:layout_height="24dp"
                 android:layout_weight="1"
                 android:contentDescription="@string/edit"
                 app:srcCompat="@drawable/edit" />
@@ -83,8 +77,8 @@
 
             <ImageView
                 android:id="@+id/imageViewBinIcon2"
-                android:layout_width="32dp"
-                android:layout_height="29dp"
+                android:layout_width="28dp"
+                android:layout_height="24dp"
                 android:layout_weight="1"
                 android:contentDescription="@string/bin"
                 app:srcCompat="@drawable/bin" />

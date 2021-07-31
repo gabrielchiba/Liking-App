@@ -1,20 +1,20 @@
 package com.example.likingapp.models;
 
-import org.json.JSONArray;
+import java.util.List;
 
 public class Data {
     private int offset;
     private int limit;
     private int total;
     private int count;
-    // TODO
-    // Results
+    private List<Hero> results;
 
-    public Data(int offset, int limit, int total, int count) {
+    public Data(int offset, int limit, int total, int count, List<Hero> results) {
         this.offset = offset;
         this.limit = limit;
         this.total = total;
         this.count = count;
+        this.results = results;
     }
 
     public int getOffset() {
@@ -49,4 +49,11 @@ public class Data {
         this.count = count;
     }
 
+    public List<Hero> getResults() {
+        return results;
+    }
+
+    public void setResults(List<Hero> results) {
+        this.results = results;
+    }
 }

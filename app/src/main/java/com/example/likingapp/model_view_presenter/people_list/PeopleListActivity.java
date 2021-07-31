@@ -10,18 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import com.example.likingapp.R;
 import com.example.likingapp.databinding.ActivityPeopleListBinding;
 import com.example.likingapp.model_view_presenter.register_person.RegisterPersonActivity;
-import com.example.likingapp.models.OwnUser;
-import com.example.likingapp.models.Person;
-import com.example.likingapp.utils.PeopleRecyclerViewAdapter;
-
-import se.emilsjolander.sprinkles.Query;
+import com.example.likingapp.adapters.PeopleRecyclerViewAdapter;
 
 
 public class PeopleListActivity extends AppCompatActivity implements PeopleListContract.View, PeopleRecyclerViewAdapter.ItemActionListener{

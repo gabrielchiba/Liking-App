@@ -2,28 +2,33 @@ package com.example.likingapp.model_view_presenter.simple_api_call;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.example.likingapp.R;
+import com.example.likingapp.adapters.SuperHeroRecyclerViewAdapter;
 import com.example.likingapp.api.RetrofitClient;
 import com.example.likingapp.databinding.ActivitySimpleApicallBinding;
+import com.example.likingapp.models.Hero;
 import com.example.likingapp.models.CharacterDataWrapper;
-import com.example.likingapp.utils.PeopleRecyclerViewAdapter;
 import com.example.likingapp.utils.constants;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAPICallContract.View, PeopleRecyclerViewAdapter.ItemActionListener{
+public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAPICallContract.View, SuperHeroRecyclerViewAdapter.ItemActionListener{
 
     private ActivitySimpleApicallBinding binding;
     private SimpleAPICallContract.Presenter presenter;
 
-    PeopleRecyclerViewAdapter adapter;
+    SuperHeroRecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,17 +43,16 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
         String email = getIntent().getStringExtra("email");
         if (email != null) binding.setEmail(email);
 
-//        setupRecyclerView();
-
         getSuperHeroes();
     }
 
-    private void setupRecyclerView() {
-//        RecyclerView recyclerView = binding.heroesList;
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        adapter = new PeopleRecyclerViewAdapter(this, );
-//        adapter.setActionListener(this);
-//        recyclerView.setAdapter(adapter);
+    @Override
+    public void setupRecyclerView(List<Hero> heroes) {
+        RecyclerView recyclerView = binding.heroesList;
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new SuperHeroRecyclerViewAdapter(this, heroes);
+        adapter.setActionListener(this);
+        recyclerView.setAdapter(adapter);
     }
 
     private void getSuperHeroes() {
@@ -58,14 +62,12 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
             @Override
             public void onResponse(Call<CharacterDataWrapper> call, Response<CharacterDataWrapper> response) {
                 CharacterDataWrapper myheroList = response.body();
-                Log.d("BODY", String.valueOf(myheroList.getData().getCount()));
-
-//                superListView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, myhero));
+                setupRecyclerView(myheroList.getData().getResults());
+//                Log.d("BODY", String.valueOf(myheroList.getData().getResults().get(0)));
             }
 
             @Override
             public void onFailure(Call<CharacterDataWrapper> call, Throwable t) {
-                t.getCause();
                 Toast.makeText(getApplicationContext(), "Erro ao acessar Api", Toast.LENGTH_LONG).show();
             }
 

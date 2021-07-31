@@ -1,39 +1,36 @@
-package com.example.likingapp.utils;
+package com.example.likingapp.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-
-import com.example.likingapp.BR;
-import com.example.likingapp.databinding.RecyclerviewPeopleRowBinding;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.likingapp.models.Person;
+import com.example.likingapp.BR;
+import com.example.likingapp.databinding.RecyclerviewSuperheroRowBinding;
+import com.example.likingapp.models.Hero;
 
 import java.util.List;
 
-public class PeopleRecyclerViewAdapter extends RecyclerView.Adapter<PeopleRecyclerViewAdapter.ViewHolder> {
-
-    private final List<Person> mData;
+public class SuperHeroRecyclerViewAdapter extends RecyclerView.Adapter<SuperHeroRecyclerViewAdapter.ViewHolder>{
+    private final List<Hero> mData;
     private final LayoutInflater mInflater;
-    private ItemActionListener mActionListener;
+    private SuperHeroRecyclerViewAdapter.ItemActionListener mActionListener;
 
-    public PeopleRecyclerViewAdapter(Context context, List<Person> data) {
+    public SuperHeroRecyclerViewAdapter(Context context, List<Hero> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RecyclerviewPeopleRowBinding recyclerviewPeopleRowBinding =
-                RecyclerviewPeopleRowBinding.inflate(mInflater, parent, false);
-        return new ViewHolder(recyclerviewPeopleRowBinding);
+        RecyclerviewSuperheroRowBinding recyclerviewSuperheroRowBinding =
+                RecyclerviewSuperheroRowBinding.inflate(mInflater, parent, false);
+        return new ViewHolder(recyclerviewSuperheroRowBinding);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(SuperHeroRecyclerViewAdapter.ViewHolder holder, int position) {
         Object obj = mData.get(position);
         holder.bind(obj);
     }
@@ -46,29 +43,29 @@ public class PeopleRecyclerViewAdapter extends RecyclerView.Adapter<PeopleRecycl
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private final RecyclerviewPeopleRowBinding binding;
+        private final RecyclerviewSuperheroRowBinding binding;
 
-        ViewHolder(RecyclerviewPeopleRowBinding binding) {
+        ViewHolder(RecyclerviewSuperheroRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.imageViewBinIcon.setOnClickListener(v -> mActionListener.deleteItem(getAdapterPosition()));
-            binding.imageViewEditIcon.setOnClickListener(v -> mActionListener.editItem(getAdapterPosition()));
+            binding.imageViewBinIcon2.setOnClickListener(v -> mActionListener.deleteItem(getAdapterPosition()));
+            binding.imageViewEditIcon2.setOnClickListener(v -> mActionListener.editItem(getAdapterPosition()));
         }
 
         public void bind(Object obj) {
-            binding.setVariable(BR.person, obj);
+            binding.setVariable(BR.hero, obj);
             binding.executePendingBindings();
         }
     }
 
     // Helper function to return element by position
-    public Person getItem(int id) {
+    public Hero getItem(int id) {
         return mData.get(id);
     }
 
     // Helper function to add elements
-    public void add(int position, Person person) {
-        mData.add(position, person);
+    public void add(int position, Hero character) {
+        mData.add(position, character);
         notifyDataSetChanged();
     }
 
@@ -79,8 +76,8 @@ public class PeopleRecyclerViewAdapter extends RecyclerView.Adapter<PeopleRecycl
     }
 
     // Helper function to update elements
-    public void update(int position, Person person) {
-        mData.set(position, person);
+    public void update(int position, Hero character) {
+        mData.set(position, character);
         notifyDataSetChanged();
     }
 
@@ -91,7 +88,7 @@ public class PeopleRecyclerViewAdapter extends RecyclerView.Adapter<PeopleRecycl
     }
 
     // Bind ActionListener
-    public void setActionListener(ItemActionListener itemActionListener) {
+    public void setActionListener(SuperHeroRecyclerViewAdapter.ItemActionListener itemActionListener) {
         this.mActionListener = itemActionListener;
     }
 }
