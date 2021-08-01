@@ -4,20 +4,18 @@ import android.database.sqlite.SQLiteDatabase;
 
 import se.emilsjolander.sprinkles.Migration;
 
-public class CreateHeroMigration extends Migration {
+public class CreateSeriesMigration extends Migration {
     @Override
     protected void doMigration(SQLiteDatabase db) {
         db.execSQL(
-                " CREATE TABLE IF NOT EXISTS hero ( " +
+                " CREATE TABLE IF NOT EXISTS series ( " +
                         " id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        " hero_id INTEGER, "  +
                         " name TEXT, "  +
-                        " description TEXT, "  +
-                        " modified TEXT, "  +
-                        " thumbnail_url TEXT, " +
                         " resourceURI TEXT, " +
                         " user_id INTEGER, " +
-                        " FOREIGN KEY (user_id) REFERENCES own_user(id)" +
+                        " hero_id INTEGER, " +
+                        " FOREIGN KEY (user_id) REFERENCES own_user(id), " +
+                        " FOREIGN KEY (hero_id) REFERENCES hero(hero_id)" +
                         " ) "
         );
     }

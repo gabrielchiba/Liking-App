@@ -46,12 +46,12 @@ public class SuperHeroRecyclerViewAdapter extends RecyclerView.Adapter<SuperHero
 
     // Helper function to set thumbnail element
     public void setThumbnail(SuperHeroRecyclerViewAdapter.ViewHolder holder) {
-        String imageURL = holder.binding.getHero().getThumbnail().getPath();
+        String imageURL = holder.binding.getHero().thumbnail.getPath();
 
         if (imageURL != null && !imageURL.isEmpty()) {
 
-            String completeURL = holder.binding.getHero().getThumbnail().getPath() + "." +
-                    holder.binding.getHero().getThumbnail().getExtension();
+            String completeURL = holder.binding.getHero().thumbnail.getPath() + "." +
+                    holder.binding.getHero().thumbnail.getExtension();
 
             Picasso.get().load(completeURL)
                     .into(holder.binding.heroAvatar);
@@ -81,7 +81,7 @@ public class SuperHeroRecyclerViewAdapter extends RecyclerView.Adapter<SuperHero
                 String filterText = constraint.toString().toLowerCase().trim();
 
                 for (Hero hero: mDataFull) {
-                    if (hero.getName().toLowerCase().contains(filterText)) {
+                    if (hero.name.toLowerCase().contains(filterText)) {
                         filteredList.add(hero);
                     }
                 }
