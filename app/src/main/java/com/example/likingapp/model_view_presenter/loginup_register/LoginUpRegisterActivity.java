@@ -108,12 +108,19 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
         if (presenter.haveBlankFields(user)) {
             Toast.makeText(this, this.getString(R.string.complete_fields), Toast.LENGTH_SHORT).show();
         }
+        else if (presenter.checkUserLoginExist(user)) {
+            if (presenter.isUserWrong(user, presenter.getUserByLogin(user.login))) {
+                Toast.makeText(this, this.getString(R.string.user_exists), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, R.string.success_login, Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(LoginUpRegisterActivity.this, SimpleAPICallActivity.class);
+                i.putExtra("registeredUserID", presenter.getUserByLogin(user.login).id);
+                startActivity(i);
+            }
+
+        }
         else {
-            Intent i = new Intent(LoginUpRegisterActivity.this, SimpleAPICallActivity.class);
-            i.putExtra("firstName", user.name);
-            i.putExtra("login", user.login);
-            i.putExtra("email", user.email);
-            startActivity(i);
+            Toast.makeText(this, R.string.user_dont_exist, Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -1,7 +1,5 @@
 package com.example.likingapp.models;
 
-import se.emilsjolander.sprinkles.Model;
-
 public class Hero {
     private int id;
     private String name;

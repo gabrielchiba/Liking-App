@@ -5,14 +5,8 @@
 
     <data>
         <variable
-            name="firstName"
-            type="String" />
-        <variable
-            name="login"
-            type="String" />
-        <variable
-            name="email"
-            type="String" />
+            name="user"
+            type="com.example.likingapp.models.OwnUser" />
     </data>
 
     <FrameLayout
@@ -21,13 +15,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="115dp"
+            android:layout_height="135dp"
             android:background="@color/white"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="66dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
@@ -37,7 +31,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="20sp"
                     android:fontFamily="@font/montserrat_semi_bold"
-                    android:text="@{`Olá, ` + firstName}"
+                    android:text="@{`Olá, ` + user.name}"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -47,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="@{`login: ` + login}"
+                    android:text="@{`login: ` + user.login}"
                     android:textColor="@color/light_gray"
                     android:textSize="12sp" />
 
@@ -57,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/montserrat_regular"
-                    android:text="@{email}"
+                    android:text="@{user.email}"
                     android:textColor="@color/light_gray"
                     android:textSize="12sp" />
 
@@ -67,6 +61,7 @@
                 android:id="@+id/toolbar2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
                 android:layout_marginEnd="10dp"
                 android:gravity="center_horizontal"
                 android:minHeight="?attr/actionBarSize"

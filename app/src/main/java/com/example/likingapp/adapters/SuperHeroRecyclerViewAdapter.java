@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.likingapp.BR;
 import com.example.likingapp.databinding.RecyclerviewSuperheroRowBinding;
 import com.example.likingapp.models.Hero;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +41,21 @@ public class SuperHeroRecyclerViewAdapter extends RecyclerView.Adapter<SuperHero
     public void onBindViewHolder(SuperHeroRecyclerViewAdapter.ViewHolder holder, int position) {
         Object obj = mData.get(position);
         holder.bind(obj);
+        setThumbnail(holder);
+    }
+
+    // Helper function to set thumbnail element
+    public void setThumbnail(SuperHeroRecyclerViewAdapter.ViewHolder holder) {
+        String imageURL = holder.binding.getHero().getThumbnail().getPath();
+
+        if (imageURL != null && !imageURL.isEmpty()) {
+
+            String completeURL = holder.binding.getHero().getThumbnail().getPath() + "." +
+                    holder.binding.getHero().getThumbnail().getExtension();
+
+            Picasso.get().load(completeURL)
+                    .into(holder.binding.heroAvatar);
+        }
     }
 
     // Return total number of elements on list

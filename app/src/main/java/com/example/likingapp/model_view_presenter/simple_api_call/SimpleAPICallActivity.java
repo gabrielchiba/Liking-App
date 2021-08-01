@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.likingapp.R;
@@ -16,13 +17,16 @@ import com.example.likingapp.api.RetrofitClient;
 import com.example.likingapp.databinding.ActivitySimpleApicallBinding;
 import com.example.likingapp.models.Hero;
 import com.example.likingapp.models.CharacterDataWrapper;
+import com.example.likingapp.models.OwnUser;
 import com.example.likingapp.utils.constants;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import se.emilsjolander.sprinkles.Query;
 
 public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAPICallContract.View,
         SearchView.OnQueryTextListener, SuperHeroRecyclerViewAdapter.ItemActionListener{
@@ -32,6 +36,12 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
 
     SuperHeroRecyclerViewAdapter adapter;
 
+    // Foreign Key Reference
+    private long userID;
+
+    // Flag to update
+    private boolean isUpdate = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +49,10 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
         binding = DataBindingUtil.setContentView(this,
                 R.layout.activity_simple_apicall);
 
-        setExtras();
+        userID = getIntent().getLongExtra("registeredUserID", 0);
+        OwnUser user = Query.one(OwnUser.class, " SELECT * FROM own_user WHERE id = "+userID, true).get();
+
+        setExtras(user);
         getSuperHeroes();
         setupSearchView();
 
@@ -61,13 +74,8 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
     }
 
     @Override
-    public void setExtras() {
-        String firstName = getIntent().getStringExtra("firstName");
-        if (firstName != null)  binding.setFirstName(firstName);
-        String login = getIntent().getStringExtra("login");
-        if (login != null) binding.setLogin(login);
-        String email = getIntent().getStringExtra("email");
-        if (email != null) binding.setEmail(email);
+    public void setExtras(OwnUser user) {
+        binding.setUser(user);
     }
 
     private void getSuperHeroes() {
