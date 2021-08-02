@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.example.likingapp.R;
 import com.example.likingapp.databinding.FragmentPersonalListBinding;
-import com.example.likingapp.model_view_presenter.people_list.PeopleListActivity;
-import com.example.likingapp.model_view_presenter.simple_api_call.SimpleAPICallActivity;
+import com.example.likingapp.model_view_presenter.personal_list.PersonalListActivity;
+
 
 public class PersonalListFragment extends Fragment {
 
@@ -38,7 +38,7 @@ public class PersonalListFragment extends Fragment {
     }
 
     public void personalListAccess(View v, long id) {
-        Intent i = new Intent(getActivity(), PeopleListActivity.class);
+        Intent i = new Intent(getActivity(), PersonalListActivity.class);
         i.putExtra("registeredUserID", id);
         startActivity(i);
     }

@@ -45,7 +45,8 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
 
         ActivityResultLauncher<Intent> emailActivityResultLauncher = createEmailActivityLauncher(binding.getUser());
 
-        binding.buttonRegister.setOnClickListener(v -> registerEmail(v, binding.getUser(), emailActivityResultLauncher));
+        binding.imageViewFacebook.setOnClickListener(v -> registerEmail(v, binding.getUser(), emailActivityResultLauncher));
+        binding.imageViewGmail.setOnClickListener(v -> registerEmail(v, binding.getUser(), emailActivityResultLauncher));
         binding.buttonApi.setOnClickListener(v -> apiAccess(v, binding.getUser()));
         binding.buttonAccess.setOnClickListener(v -> registerAccess(v, binding.getUser()));
 

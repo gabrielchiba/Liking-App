@@ -19,6 +19,7 @@ import com.example.likingapp.databinding.ActivitySimpleApicallBinding;
 import com.example.likingapp.model_view_presenter.fragment_personal_list.PersonalListFragment;
 import com.example.likingapp.model_view_presenter.loginup_register.LoginUpRegisterActivity;
 import com.example.likingapp.model_view_presenter.people_list.PeopleListActivity;
+import com.example.likingapp.model_view_presenter.superhero_info.SuperheroInfoActivity;
 import com.example.likingapp.models.Hero;
 import com.example.likingapp.models.CharacterDataWrapper;
 import com.example.likingapp.models.OwnUser;
@@ -105,7 +106,7 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
 
             @Override
             public void onFailure(Call<CharacterDataWrapper> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Erro ao acessar Api", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.error_api_access, Toast.LENGTH_LONG).show();
             }
 
         });
@@ -113,17 +114,18 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
 
     @Override
     public void infoItem(int position) {
-
+        Intent i = new Intent(SimpleAPICallActivity.this, SuperheroInfoActivity.class);
+        i.putExtra("heroID", adapter.getItem(position).id);
+        startActivity(i);
     }
 
     @Override
     public void addItem(int position) {
-
+        Toast.makeText(this, R.string.added_hero, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        Toast.makeText(this, "Texto enviado", Toast.LENGTH_SHORT).show();
         return false;
     }
 

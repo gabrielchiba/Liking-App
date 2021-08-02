@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.likingapp">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LikingAppNoBar">
-        <activity android:name=".model_view_presenter.register_person.RegisterPersonActivity"/>
+        <activity android:name=".model_view_presenter.superhero_info.SuperheroInfoActivity"></activity>
+        <activity android:name=".model_view_presenter.personal_list.PersonalListActivity" />
+        <activity android:name=".model_view_presenter.register_person.RegisterPersonActivity" />
         <activity android:name=".model_view_presenter.simple_api_call.SimpleAPICallActivity" />
         <activity android:name=".model_view_presenter.people_list.PeopleListActivity" />
         <activity android:name=".model_view_presenter.register_email.RegisterEmailActivity" />
