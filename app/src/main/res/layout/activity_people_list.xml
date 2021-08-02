@@ -56,7 +56,7 @@
                     android:layout_height="36dp"
                     android:layout_marginTop="10sp"
                     android:background="@color/light_bright_gray"
-                    android:iconifiedByDefault="false"
+                    app:defaultQueryHint="@string/search"
                     android:queryHint="@string/search" />
             </androidx.appcompat.widget.Toolbar>
 

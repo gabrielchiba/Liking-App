@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -15,6 +16,9 @@ import com.example.likingapp.R;
 import com.example.likingapp.adapters.SuperHeroRecyclerViewAdapter;
 import com.example.likingapp.api.RetrofitClient;
 import com.example.likingapp.databinding.ActivitySimpleApicallBinding;
+import com.example.likingapp.model_view_presenter.fragment_personal_list.PersonalListFragment;
+import com.example.likingapp.model_view_presenter.loginup_register.LoginUpRegisterActivity;
+import com.example.likingapp.model_view_presenter.people_list.PeopleListActivity;
 import com.example.likingapp.models.Hero;
 import com.example.likingapp.models.CharacterDataWrapper;
 import com.example.likingapp.models.OwnUser;
@@ -50,7 +54,10 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
                 R.layout.activity_simple_apicall);
 
         userID = getIntent().getLongExtra("registeredUserID", 0);
+
         OwnUser user = Query.one(OwnUser.class, " SELECT * FROM own_user WHERE id = "+userID, true).get();
+
+        sendExtrasToPersonalListFragment();
 
         setExtras(user);
         getSuperHeroes();
@@ -78,6 +85,13 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
         binding.setUser(user);
     }
 
+    @Override
+    public void sendExtrasToPersonalListFragment() {
+        Intent i = new Intent(SimpleAPICallActivity.this, PersonalListFragment.class);
+        i.putExtra("registeredUserID", userID);
+//        startActivity(i);
+    }
+
     private void getSuperHeroes() {
         Call<CharacterDataWrapper> call = RetrofitClient.getInstance().getMyApi().getsuperHeroes(constants.ts, constants.APIKey, constants.hash);
         Log.d("REQUEST", String.valueOf(call.request()));
@@ -98,12 +112,12 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
     }
 
     @Override
-    public void deleteItem(int position) {
+    public void infoItem(int position) {
 
     }
 
     @Override
-    public void editItem(int position) {
+    public void addItem(int position) {
 
     }
 

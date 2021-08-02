@@ -38,4 +38,6 @@
     <string name="date_hint">01/01/2000</string>
     <string name="phone_hint">11 99876–5432</string>
     <string name="cpf_hint">123.456.789.10</string>
+    <string name="my_list">Minha Lista</string>
+    <string name="back">Voltar</string>
 </resources>
