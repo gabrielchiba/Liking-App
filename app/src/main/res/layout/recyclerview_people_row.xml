@@ -77,8 +77,8 @@
 
             <ImageView
                 android:id="@+id/imageViewEditIcon"
-                android:layout_width="32dp"
-                android:layout_height="29dp"
+                android:layout_width="29dp"
+                android:layout_height="28dp"
                 android:layout_weight="1"
                 android:contentDescription="@string/edit"
                 app:srcCompat="@drawable/edit" />

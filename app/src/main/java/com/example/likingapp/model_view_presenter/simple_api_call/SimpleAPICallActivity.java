@@ -3,28 +3,27 @@ package com.example.likingapp.model_view_presenter.simple_api_call;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.likingapp.R;
 import com.example.likingapp.adapters.SuperHeroRecyclerViewAdapter;
 import com.example.likingapp.api.RetrofitClient;
 import com.example.likingapp.databinding.ActivitySimpleApicallBinding;
+import com.example.likingapp.model_view_presenter.fragment_api_call.APICallFragment;
 import com.example.likingapp.model_view_presenter.fragment_personal_list.PersonalListFragment;
-import com.example.likingapp.model_view_presenter.loginup_register.LoginUpRegisterActivity;
-import com.example.likingapp.model_view_presenter.people_list.PeopleListActivity;
 import com.example.likingapp.model_view_presenter.superhero_info.SuperheroInfoActivity;
 import com.example.likingapp.models.Hero;
 import com.example.likingapp.models.CharacterDataWrapper;
 import com.example.likingapp.models.OwnUser;
 import com.example.likingapp.utils.constants;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -63,6 +62,7 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
         setExtras(user);
         getSuperHeroes();
         setupSearchView();
+        setFragment(APICallFragment.newInstance());
 
     }
 
@@ -87,8 +87,16 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
     }
 
     @Override
+    public void setFragment(Fragment fragment) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(binding.frameLayoutFrag.getId(), fragment); // frag_container is your FrameLayout container
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ft.commit();
+    }
+
+    @Override
     public void sendExtrasToPersonalListFragment() {
-        Intent i = new Intent(SimpleAPICallActivity.this, PersonalListFragment.class);
+        Intent i = new Intent(SimpleAPICallActivity.this, APICallFragment.class);
         i.putExtra("registeredUserID", userID);
 //        startActivity(i);
     }

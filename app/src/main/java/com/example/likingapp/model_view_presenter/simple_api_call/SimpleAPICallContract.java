@@ -1,5 +1,7 @@
 package com.example.likingapp.model_view_presenter.simple_api_call;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.likingapp.models.Hero;
 import com.example.likingapp.models.OwnUser;
 import com.example.likingapp.models.Person;
@@ -12,6 +14,7 @@ public interface SimpleAPICallContract {
         void setupSearchView();
         void setExtras(OwnUser user);
         void sendExtrasToPersonalListFragment();
+        void setFragment(Fragment fragment);
     }
 
     interface Presenter {

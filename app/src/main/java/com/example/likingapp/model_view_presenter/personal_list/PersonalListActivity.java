@@ -2,12 +2,18 @@ package com.example.likingapp.model_view_presenter.personal_list;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 
+import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.likingapp.R;
 import com.example.likingapp.databinding.ActivityPersonalListBinding;
+import com.example.likingapp.model_view_presenter.fragment_api_call.APICallFragment;
+import com.example.likingapp.model_view_presenter.fragment_personal_list.PersonalListFragment;
+import com.example.likingapp.models.OwnUser;
+
+import se.emilsjolander.sprinkles.Query;
 
 
 public class PersonalListActivity extends AppCompatActivity implements PersonalListContract.View{
@@ -27,6 +33,24 @@ public class PersonalListActivity extends AppCompatActivity implements PersonalL
                 R.layout.activity_personal_list);
 
         userID = getIntent().getLongExtra("registeredUserID", 0);
-        Log.d("ID", String.valueOf(userID));
+
+        OwnUser user = Query.one(OwnUser.class, " SELECT * FROM own_user WHERE id = "+userID, true).get();
+
+        setExtras(user);
+        setFragment(PersonalListFragment.newInstance());
+
+    }
+
+    @Override
+    public void setExtras(OwnUser user) {
+        binding.setUser(user);
+    }
+
+    @Override
+    public void setFragment(Fragment fragment) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(binding.frameLayoutFrag.getId(), fragment); // frag_container is your FrameLayout container
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ft.commit();
     }
 }

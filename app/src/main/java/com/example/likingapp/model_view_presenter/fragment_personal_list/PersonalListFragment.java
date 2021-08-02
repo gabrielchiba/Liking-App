@@ -9,14 +9,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.likingapp.R;
 import com.example.likingapp.databinding.FragmentPersonalListBinding;
-import com.example.likingapp.model_view_presenter.personal_list.PersonalListActivity;
 
 
 public class PersonalListFragment extends Fragment {
+
+    public static Fragment newInstance() {
+        PersonalListFragment mFragment = new PersonalListFragment();
+        return mFragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,19 +32,11 @@ public class PersonalListFragment extends Fragment {
 
         FragmentPersonalListBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_personal_list, container, false);
 
-        long userID = getActivity().getIntent().getLongExtra("registeredUserID", 0);
-
         View view = binding.getRoot();
-        binding.buttonMyList.setOnClickListener(v -> personalListAccess(v, userID));
-        binding.buttonBack.setOnClickListener(this::backAccess);
+        binding.buttonBack2.setOnClickListener(this::backAccess);
         return view;
     }
 
-    public void personalListAccess(View v, long id) {
-        Intent i = new Intent(getActivity(), PersonalListActivity.class);
-        i.putExtra("registeredUserID", id);
-        startActivity(i);
-    }
 
     public void backAccess(View v) {
         getActivity().onBackPressed();

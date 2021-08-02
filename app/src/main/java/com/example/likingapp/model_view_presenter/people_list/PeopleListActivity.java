@@ -17,12 +17,16 @@ import com.example.likingapp.R;
 import com.example.likingapp.databinding.ActivityPeopleListBinding;
 import com.example.likingapp.model_view_presenter.register_person.RegisterPersonActivity;
 import com.example.likingapp.adapters.PeopleRecyclerViewAdapter;
+import com.example.likingapp.utils.AppUtils;
 
 
 public class PeopleListActivity extends AppCompatActivity implements PeopleListContract.View,
         SearchView.OnQueryTextListener, PeopleRecyclerViewAdapter.ItemActionListener{
     PeopleRecyclerViewAdapter adapter;
     ActivityResultLauncher<Intent> personActivityResultLauncher;
+
+    // Auxiliary Functions Class
+    AppUtils appUtils;
 
     private ActivityPeopleListBinding binding;
     private PeopleListContract.Presenter presenter;
@@ -47,6 +51,8 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
         personActivityResultLauncher = createPersonActivityLauncher();
 
         binding.fab.setOnClickListener(view -> registerNewPerson(0, false));
+
+
     }
 
     @Override
