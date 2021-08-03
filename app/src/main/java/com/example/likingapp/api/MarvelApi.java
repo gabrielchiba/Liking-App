@@ -8,7 +8,10 @@ import retrofit2.http.Query;
 
 public interface MarvelApi {
     @GET("characters")
-    Call<CharacterDataWrapper> getsuperHeroes(@Query("ts") String ts,
-                                              @Query("apikey") String apiKey,
-                                              @Query("hash") String hash);
+    Call<CharacterDataWrapper> getSuperHeroes(
+            @Query("ts") String ts,
+            @Query("apikey") String apiKey,
+            @Query("hash") String hash,
+            @Query("limit") String limit,
+            @Query("offset") String offset);
 }

@@ -18,11 +18,11 @@ import com.example.likingapp.adapters.SuperHeroRecyclerViewAdapter;
 import com.example.likingapp.api.RetrofitClient;
 import com.example.likingapp.databinding.ActivitySimpleApicallBinding;
 import com.example.likingapp.model_view_presenter.fragment_api_call.APICallFragment;
-import com.example.likingapp.model_view_presenter.fragment_personal_list.PersonalListFragment;
 import com.example.likingapp.model_view_presenter.superhero_info.SuperheroInfoActivity;
 import com.example.likingapp.models.Hero;
 import com.example.likingapp.models.CharacterDataWrapper;
 import com.example.likingapp.models.OwnUser;
+import com.example.likingapp.utils.AppUtils;
 import com.example.likingapp.utils.constants;
 
 import java.util.List;
@@ -38,6 +38,9 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
     private ActivitySimpleApicallBinding binding;
     private SimpleAPICallContract.Presenter presenter;
 
+    // Auxiliary Class
+    AppUtils appUtils;
+
     SuperHeroRecyclerViewAdapter adapter;
 
     // Foreign Key Reference
@@ -52,6 +55,8 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
         presenter = new SimpleAPICallPresenter(this, this);
         binding = DataBindingUtil.setContentView(this,
                 R.layout.activity_simple_apicall);
+
+        appUtils = new AppUtils(getApplicationContext());
 
         userID = getIntent().getLongExtra("registeredUserID", 0);
 
@@ -89,7 +94,7 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
     @Override
     public void setFragment(Fragment fragment) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(binding.frameLayoutFrag.getId(), fragment); // frag_container is your FrameLayout container
+        ft.replace(binding.frameLayoutFrag.getId(), fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.commit();
     }
@@ -102,7 +107,15 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
     }
 
     private void getSuperHeroes() {
-        Call<CharacterDataWrapper> call = RetrofitClient.getInstance().getMyApi().getsuperHeroes(constants.ts, constants.APIKey, constants.hash);
+        Call<CharacterDataWrapper> call = RetrofitClient
+                .getInstance()
+                .getMyApi()
+                .getSuperHeroes(
+                        appUtils.getTimeStamp(),
+                        constants.APIKey,
+                        constants.hash,
+                        "100",
+                        "0");
         Log.d("REQUEST", String.valueOf(call.request()));
         call.enqueue(new Callback<CharacterDataWrapper>() {
             @Override

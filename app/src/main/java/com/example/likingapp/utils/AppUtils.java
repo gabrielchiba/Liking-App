@@ -8,4 +8,9 @@ public class AppUtils {
         this.context = context;
     }
 
+    public String getTimeStamp() {
+        long tsLong = System.currentTimeMillis() / 1000;
+        return Long.toString(tsLong);
+    }
+
 }
