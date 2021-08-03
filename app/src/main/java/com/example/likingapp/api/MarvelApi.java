@@ -11,6 +11,19 @@ public interface MarvelApi {
     Call<CharacterDataWrapper> getSuperHeroes(
             @Query("ts") String ts,
             @Query("apikey") String apiKey,
+            @Query("hash") String hash);
+
+    @GET("characters")
+    Call<CharacterDataWrapper> getSuperHeroesAtLimit(
+            @Query("ts") String ts,
+            @Query("apikey") String apiKey,
+            @Query("hash") String hash,
+            @Query("limit") String limit);
+
+    @GET("characters")
+    Call<CharacterDataWrapper> getSuperHeroesAtLimitAtOffset(
+            @Query("ts") String ts,
+            @Query("apikey") String apiKey,
             @Query("hash") String hash,
             @Query("limit") String limit,
             @Query("offset") String offset);

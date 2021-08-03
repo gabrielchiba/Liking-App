@@ -1,7 +1,9 @@
 package com.example.likingapp.utils;
 
+import com.example.likingapp.BuildConfig;
+
 public class constants {
     public static final String URL = "http://gateway.marvel.com/v1/public/";
-    public static final String APIKey = "713f2e8ae8e3dfa2effd556b80804df9";
-    public static final String hash = "e311cd71f995d1019300f8b8f6cfd912";
+    public static final String API_KEY = BuildConfig.PUBLIC_KEY;
+    public static final String PRIVATE_KEY = BuildConfig.PRIVATE_KEY;
 }

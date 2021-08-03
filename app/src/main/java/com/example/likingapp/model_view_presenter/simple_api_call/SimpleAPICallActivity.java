@@ -107,13 +107,14 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
     }
 
     private void getSuperHeroes() {
+        String ts = appUtils.getTimeStamp();
         Call<CharacterDataWrapper> call = RetrofitClient
                 .getInstance()
                 .getMyApi()
-                .getSuperHeroes(
-                        appUtils.getTimeStamp(),
-                        constants.APIKey,
-                        constants.hash,
+                .getSuperHeroesAtLimitAtOffset(
+                        ts,
+                        constants.API_KEY,
+                        (appUtils.md5(ts+constants.PRIVATE_KEY+constants.API_KEY)),
                         "100",
                         "0");
         Log.d("REQUEST", String.valueOf(call.request()));
