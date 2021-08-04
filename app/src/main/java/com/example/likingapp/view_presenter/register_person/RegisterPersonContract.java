@@ -4,6 +4,8 @@ import com.example.likingapp.models.Person;
 
 import java.util.Calendar;
 
+import mk.webfactory.dz.maskededittext.MaskedEditText;
+
 public interface RegisterPersonContract {
     interface View {
         void registerPerson(Person person);
@@ -26,5 +28,6 @@ public interface RegisterPersonContract {
         boolean checkPersonDBExists();
         boolean checkPersonCpfExists(Person person);
         Person getOnePersonOfUserFromDB(long id);
+        String getRawEditValue(MaskedEditText maskedEditText);
     }
 }

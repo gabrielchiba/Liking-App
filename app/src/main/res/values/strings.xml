@@ -33,6 +33,7 @@
     <string name="cpf_invalid">CPF Inválido</string>
     <string name="cpf_exists">CPF Já Existe</string>
     <string name="success_login">Login Realizado com Sucesso</string>
+    <string name="register_success">Cadastro Realizado com Sucesso</string>
     <string name="bin">Bin</string>
     <string name="edit">Edit</string>
     <string name="date_hint">01/01/2000</string>
@@ -41,7 +42,6 @@
     <string name="my_list">Minha Lista</string>
     <string name="back">Voltar</string>
     <string name="error_api_access">Erro ao Acessar API</string>
-    <string name="added_hero">Super Herói Adicionado</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="added_hero">Super Herói Adicionado à Lista</string>
+    <string name="remove_hero">Super Herói Removido da Lista</string>
 </resources>

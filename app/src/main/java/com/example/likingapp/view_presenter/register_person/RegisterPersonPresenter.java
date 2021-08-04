@@ -1,9 +1,11 @@
 package com.example.likingapp.view_presenter.register_person;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.likingapp.models.Person;
 
+import mk.webfactory.dz.maskededittext.MaskedEditText;
 import se.emilsjolander.sprinkles.Query;
 
 public class RegisterPersonPresenter implements RegisterPersonContract.Presenter{
@@ -49,7 +51,7 @@ public class RegisterPersonPresenter implements RegisterPersonContract.Presenter
 
     @Override
     public boolean isValidPhoneNumber(String phone) {
-        String firstNumber = phone.substring(0, 1);
+        String firstNumber = phone.substring(2, 3);
         return firstNumber.equals("8") || firstNumber.equals("9");
     }
 
@@ -73,6 +75,11 @@ public class RegisterPersonPresenter implements RegisterPersonContract.Presenter
     @Override
     public Person getOnePersonOfUserFromDB(long id) {
         return Query.one(Person.class, " SELECT * FROM person WHERE id = '" + id + "'", true).get();
+    }
+
+    @Override
+    public String getRawEditValue(MaskedEditText maskedEditText) {
+        return maskedEditText.getRawInput();
     }
 
 }

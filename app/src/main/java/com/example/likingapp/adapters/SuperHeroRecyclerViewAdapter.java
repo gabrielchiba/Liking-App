@@ -107,7 +107,7 @@ public class SuperHeroRecyclerViewAdapter extends RecyclerView.Adapter<SuperHero
             super(binding.getRoot());
             this.binding = binding;
             binding.imageViewInfoIcon.setOnClickListener(v -> mActionListener.infoItem(getAdapterPosition()));
-            binding.imageViewAddIcon.setOnClickListener(v -> mActionListener.addItem(getAdapterPosition()));
+            binding.imageViewAddIcon.setOnClickListener(v -> mActionListener.addOrDeleteItem(getAdapterPosition()));
         }
 
         public void bind(Object obj) {
@@ -132,6 +132,7 @@ public class SuperHeroRecyclerViewAdapter extends RecyclerView.Adapter<SuperHero
         if (heroes != null) {
             mData.addAll((List)heroes);
             mDataFull.addAll((List)heroes);
+            notifyDataSetChanged();
         }
     }
 
@@ -147,10 +148,10 @@ public class SuperHeroRecyclerViewAdapter extends RecyclerView.Adapter<SuperHero
         notifyDataSetChanged();
     }
 
-    // Interface for delete and edit functions
+    // Interface for add/delete and edit functions
     public interface ItemActionListener {
         void infoItem(int position);
-        void addItem(int position);
+        void addOrDeleteItem(int position);
     }
 
     // Bind ActionListener

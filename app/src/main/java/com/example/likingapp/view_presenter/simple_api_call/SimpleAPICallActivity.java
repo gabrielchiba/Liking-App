@@ -35,7 +35,7 @@ import retrofit2.Response;
 import se.emilsjolander.sprinkles.Query;
 
 public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAPICallContract.View,
-        SearchView.OnQueryTextListener, SuperHeroRecyclerViewAdapter.ItemActionListener{
+        SuperHeroRecyclerViewAdapter.ItemActionListener{
 
     private ActivitySimpleApicallBinding binding;
     private SimpleAPICallContract.Presenter presenter;
@@ -67,9 +67,10 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
         sendExtrasToPersonalListFragment();
 
         setExtras(user);
-        getAllSuperHeroes();
+        setupRecyclerView();
         setupSearchView();
         setFragment(APICallFragment.newInstance());
+        getAllSuperHeroes();
 
     }
 
@@ -84,8 +85,21 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
 
     @Override
     public void setupSearchView() {
-        binding.searchView.setOnQueryTextListener(this);
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        binding.searchView.setFocusable(false);
         binding.searchView.setIconifiedByDefault(false);
+        binding.searchView.clearFocus();
     }
 
     @Override
@@ -113,8 +127,6 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
         String ts = appUtils.getTimeStamp();
         String hash = appUtils.md5(ts+constants.PRIVATE_KEY+constants.API_KEY);
         int limit = 100;
-
-        setupRecyclerView();
 
         for (int i = 0; i < 1493; i+=limit) {
             Call<CharacterDataWrapper> call = presenter.getSuperHeroesFromAPI(ts, hash, Long.toString(limit), Long.toString(i));
@@ -145,19 +157,8 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
     }
 
     @Override
-    public void addItem(int position) {
+    public void addOrDeleteItem(int position) {
         presenter.registerHeroOnDB(adapter.getItem(position), userID);
         Toast.makeText(this, R.string.added_hero, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        adapter.getFilter().filter(newText);
-        return false;
     }
 }

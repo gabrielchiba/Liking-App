@@ -18,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import mk.webfactory.dz.maskededittext.MaskedEditText;
+
 public class RegisterPersonActivity extends AppCompatActivity implements RegisterPersonContract.View, DatePickerDialog.OnDateSetListener{
 
     private ActivityRegisterPersonBinding binding;
@@ -52,6 +54,8 @@ public class RegisterPersonActivity extends AppCompatActivity implements Registe
 
     @Override
     public void registerPerson(Person person) {
+        person.phone = presenter.getRawEditValue(binding.editTextPersonPhone);
+        person.cpf = presenter.getRawEditValue(binding.editTextCpf);
         if (presenter.haveBlankFields(person)) {
             Toast.makeText(this, R.string.complete_fields, Toast.LENGTH_SHORT).show();
         }
@@ -65,7 +69,7 @@ public class RegisterPersonActivity extends AppCompatActivity implements Registe
             Toast.makeText(this, R.string.cpf_exists, Toast.LENGTH_SHORT).show();
         }
         else {
-            Toast.makeText(this, ""+person.exists(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.register_success, Toast.LENGTH_SHORT).show();
             savePerson(person);
         }
     }

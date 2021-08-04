@@ -27,4 +27,10 @@ public class PersonalListPresenter implements PersonalListContract.Presenter{
         cursorList.close();
         return heroList;
     }
+
+    @Override
+    public void removeHeroByIDFromDB(long id) {
+        Hero hero = Query.one(Hero.class, " SELECT * FROM hero WHERE id = " + id, true).get();
+        hero.delete();
+    }
 }

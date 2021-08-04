@@ -21,7 +21,7 @@ import com.example.likingapp.utils.AppUtils;
 
 
 public class PeopleListActivity extends AppCompatActivity implements PeopleListContract.View,
-        SearchView.OnQueryTextListener, PeopleRecyclerViewAdapter.ItemActionListener{
+        PeopleRecyclerViewAdapter.ItemActionListener{
     PeopleRecyclerViewAdapter adapter;
     ActivityResultLauncher<Intent> personActivityResultLauncher;
 
@@ -88,8 +88,21 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
 
     @Override
     public void setupSearchView() {
-        binding.searchView2.setOnQueryTextListener(this);
-        binding.searchView2.setIconifiedByDefault(false);
+        binding.searchViewPeopleList.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        binding.searchViewPeopleList.setFocusable(false);
+        binding.searchViewPeopleList.setIconifiedByDefault(false);
+        binding.searchViewPeopleList.clearFocus();
     }
 
     @Override
@@ -112,18 +125,5 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
     public void editItem(int position) {
         registerNewPerson(adapter.getItem(position).id, true);
         updateElement(position, adapter.getItem(position).id);
-    }
-
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        Toast.makeText(this, "Texto enviado", Toast.LENGTH_SHORT).show();
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        adapter.getFilter().filter(newText);
-        return false;
     }
 }

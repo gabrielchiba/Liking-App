@@ -12,8 +12,10 @@ public interface PersonalListContract {
         void setExtras(OwnUser user);
         void setFragment(Fragment fragment);
         void setupRecyclerView();
+        void setupSearchView();
     }
     interface Presenter {
         List<Hero> getAllHeroesOfUserFromDB(long userId);
+        void removeHeroByIDFromDB(long id);
     }
 }
