@@ -46,16 +46,16 @@ public class SuperHeroRecyclerViewAdapter extends RecyclerView.Adapter<SuperHero
 
     // Helper function to set thumbnail element
     public void setThumbnail(SuperHeroRecyclerViewAdapter.ViewHolder holder) {
-        String imageURL = holder.binding.getHero().thumbnail.getPath();
-
-        if (imageURL != null && !imageURL.isEmpty()) {
-
-            String completeURL = holder.binding.getHero().thumbnail.getPath() + "." +
-                    holder.binding.getHero().thumbnail.getExtension();
-
-            Picasso.get().load(completeURL)
-                    .into(holder.binding.heroAvatar);
+        String imageURL = holder.binding.getHero().thumbnail_url;
+        if (imageURL == null) {
+            String thumbnail = holder.binding.getHero().thumbnail.getPath();
+            if (thumbnail != null && !thumbnail.isEmpty()) {
+                imageURL = holder.binding.getHero().thumbnail.getPath() + "." +
+                        holder.binding.getHero().thumbnail.getExtension();
+            }
         }
+
+        Picasso.get().load(imageURL).into(holder.binding.heroAvatar);
     }
 
     // Return total number of elements on list

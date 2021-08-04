@@ -36,11 +36,12 @@ public class SimpleAPICallPresenter implements SimpleAPICallContract.Presenter{
         return call;
     }
 
-//    @Override
-//    public List<Hero> getAllHeroesOfUserFromDB(long userId) {
-//        CursorList<Hero> cursorList = Query.many(Hero.class, " SELECT * FROM hero WHERE user_id = '" + userId + "'", true).get();
-//        List<Hero> heroList = cursorList.asList();
-//        cursorList.close();
-//        return heroList;
-//    }
+    @Override
+    public void registerHeroOnDB(Hero hero, long userID) {
+        hero.thumbnail_url = hero.thumbnail.getPath() + '.' + hero.thumbnail.getExtension();
+        hero.user_id = userID;
+        hero.save();
+    }
+
+
 }

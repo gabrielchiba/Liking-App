@@ -22,6 +22,6 @@ public interface SimpleAPICallContract {
 
     interface Presenter {
         Call<CharacterDataWrapper> getSuperHeroesFromAPI(String ts, String hash, String limit, String offset);
-//        List<Hero> getAllHeroesOfUserFromDB(long userId);
+        void registerHeroOnDB(Hero hero, long userID);
     }
 }

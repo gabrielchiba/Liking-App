@@ -108,31 +108,12 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
 //        startActivity(i);
     }
 
-//    private void runthread(List<Hero> heroesList) {
-//        Handler handler = new Handler();
-//        handler.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        adapter.addAll(heroesList);
-//                        try {
-//                            Thread.sleep(1000);
-//                        } catch (InterruptedException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                });
-//            }
-//        });
-//    }
-
     @Override
     public void getAllSuperHeroes() {
         String ts = appUtils.getTimeStamp();
         String hash = appUtils.md5(ts+constants.PRIVATE_KEY+constants.API_KEY);
         int limit = 100;
+
         setupRecyclerView();
 
         for (int i = 0; i < 1493; i+=limit) {
@@ -165,6 +146,7 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
 
     @Override
     public void addItem(int position) {
+        presenter.registerHeroOnDB(adapter.getItem(position), userID);
         Toast.makeText(this, R.string.added_hero, Toast.LENGTH_SHORT).show();
     }
 

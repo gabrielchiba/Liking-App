@@ -89,6 +89,7 @@
                 android:id="@+id/heroesList"
                 android:layout_width="wrap_content"
                 android:layout_height="450dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
