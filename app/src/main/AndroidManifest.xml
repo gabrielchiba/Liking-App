@@ -12,20 +12,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LikingAppNoBar">
-        <activity android:name=".model_view_presenter.superhero_info.SuperheroInfoActivity"></activity>
-        <activity android:name=".model_view_presenter.personal_list.PersonalListActivity" />
-        <activity android:name=".model_view_presenter.register_person.RegisterPersonActivity" />
-        <activity android:name=".model_view_presenter.simple_api_call.SimpleAPICallActivity" />
-        <activity android:name=".model_view_presenter.people_list.PeopleListActivity" />
-        <activity android:name=".model_view_presenter.register_email.RegisterEmailActivity" />
-        <activity android:name=".model_view_presenter.splash_screen.SplashScreenActivity">
+        <activity android:name=".view_presenter.superhero_info.SuperheroInfoActivity" />
+        <activity android:name=".view_presenter.personal_list.PersonalListActivity" />
+        <activity android:name=".view_presenter.register_person.RegisterPersonActivity" />
+        <activity android:name=".view_presenter.simple_api_call.SimpleAPICallActivity" />
+        <activity android:name=".view_presenter.people_list.PeopleListActivity" />
+        <activity android:name=".view_presenter.register_email.RegisterEmailActivity" />
+        <activity android:name=".view_presenter.splash_screen.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".model_view_presenter.loginup_register.LoginUpRegisterActivity" />
+        <activity android:name=".view_presenter.loginup_register.LoginUpRegisterActivity" />
     </application>
 
 </manifest>

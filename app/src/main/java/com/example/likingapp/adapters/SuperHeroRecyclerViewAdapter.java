@@ -127,6 +127,14 @@ public class SuperHeroRecyclerViewAdapter extends RecyclerView.Adapter<SuperHero
         notifyDataSetChanged();
     }
 
+    // Helper function to add multiples elements
+    public void addAll(List<Hero> heroes) {
+        if (heroes != null) {
+            mData.addAll((List)heroes);
+            mDataFull.addAll((List)heroes);
+        }
+    }
+
     // Helper function to remove elements
     public void remove(int position) {
         mData.remove(position);

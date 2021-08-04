@@ -4,7 +4,7 @@
 <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".model_view_presenter.fragment_api_call.APICallFragment">
+    tools:context=".view_presenter.fragment_api_call.APICallFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

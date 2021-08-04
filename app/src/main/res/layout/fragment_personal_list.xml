@@ -4,7 +4,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".model_view_presenter.fragment_personal_list.PersonalListFragment">
+        tools:context=".view_presenter.fragment_personal_list.PersonalListFragment">
 
         <LinearLayout
             android:layout_width="match_parent"

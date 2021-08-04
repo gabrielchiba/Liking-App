@@ -17,7 +17,7 @@
         <item name="fontFamily">@font/montserrat_regular</item>
     </style>
     <!-- Base application theme. -->
-    <style name="Theme.LikingAppNoBar" parent="Theme.AppCompat.NoActionBar">
+    <style name="Theme.LikingAppNoBar" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
