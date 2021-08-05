@@ -44,4 +44,12 @@
     <string name="error_api_access">Erro ao Acessar API</string>
     <string name="added_hero">Super Herói Adicionado à Lista</string>
     <string name="remove_hero">Super Herói Removido da Lista</string>
+    <string name="my_list_hero">Minha Lista de Super Heróis</string>
+    <string name="comics">comics</string>
+    <string name="stories">histórias</string>
+    <string name="series">séries</string>
+    <string name="events">eventos</string>
+    <string name="hero_avatar">Hero Avatar</string>
+    <string name="super_hero_name">Super Hero Name</string>
+    <string name="description_super_hero">description of super hero</string>
 </resources>

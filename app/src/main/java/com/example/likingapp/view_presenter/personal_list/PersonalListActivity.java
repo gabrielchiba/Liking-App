@@ -63,7 +63,7 @@ public class PersonalListActivity extends AppCompatActivity implements PersonalL
     @Override
     public void setFragment(Fragment fragment) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(binding.frameLayoutFrag.getId(), fragment); // frag_container is your FrameLayout container
+        ft.replace(binding.frameLayoutFrag.getId(), fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.commit();
     }
@@ -72,7 +72,8 @@ public class PersonalListActivity extends AppCompatActivity implements PersonalL
     public void setupRecyclerView() {
         RecyclerView recyclerView = binding.personalHeroesList;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new SuperHeroRecyclerViewAdapter(this, presenter.getAllHeroesOfUserFromDB(userID));
+        adapter = new SuperHeroRecyclerViewAdapter(this,
+                presenter.getAllHeroesOfUserFromDB(userID), true);
         adapter.setActionListener(this);
         recyclerView.setAdapter(adapter);
     }

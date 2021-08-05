@@ -48,6 +48,7 @@
                 android:layout_height="107dp"
                 android:layout_gravity="center"
                 android:layout_weight="0"
+                android:background="@color/light_bright_gray"
                 android:contentDescription="@string/avatar"
                 tools:srcCompat="@tools:sample/avatars[1]" />
 

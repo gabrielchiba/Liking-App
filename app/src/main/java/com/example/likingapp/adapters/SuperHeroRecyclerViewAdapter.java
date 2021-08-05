@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.likingapp.BR;
+import com.example.likingapp.R;
 import com.example.likingapp.databinding.RecyclerviewSuperheroRowBinding;
 import com.example.likingapp.models.Hero;
 import com.squareup.picasso.Picasso;
@@ -22,12 +23,14 @@ public class SuperHeroRecyclerViewAdapter extends RecyclerView.Adapter<SuperHero
     private final List<Hero> mData;
     private final List<Hero> mDataFull;
     private final LayoutInflater mInflater;
+    private boolean isDelete = false;
     private SuperHeroRecyclerViewAdapter.ItemActionListener mActionListener;
 
-    public SuperHeroRecyclerViewAdapter(Context context, List<Hero> data) {
+    public SuperHeroRecyclerViewAdapter(Context context, List<Hero> data, boolean isDelete) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
         this.mDataFull = new ArrayList<>(data);
+        this.isDelete = isDelete;
     }
 
     @Override
@@ -41,7 +44,15 @@ public class SuperHeroRecyclerViewAdapter extends RecyclerView.Adapter<SuperHero
     public void onBindViewHolder(SuperHeroRecyclerViewAdapter.ViewHolder holder, int position) {
         Object obj = mData.get(position);
         holder.bind(obj);
+        changeIcon(holder);
         setThumbnail(holder);
+    }
+
+    // Check and change Action Icon if necessary
+    public void changeIcon(SuperHeroRecyclerViewAdapter.ViewHolder holder) {
+        if (isDelete) {
+            holder.binding.imageViewAddIcon.setImageResource(R.drawable.bin);
+        }
     }
 
     // Helper function to set thumbnail element

@@ -4,10 +4,127 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view_presenter.superhero_info.SuperheroInfoActivity">
 
+    <data>
+        <variable
+            name="hero_name"
+            type="String" />
+        <variable
+            name="hero_description"
+            type="String" />
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewNameHero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20sp"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:text="@{hero_name}"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewHeroListName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/my_list_hero"
+                android:textColor="@color/light_gray"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/imageViewHeroAvatar"
+                android:layout_width="107dp"
+                android:layout_height="103dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:background="@color/light_bright_gray"
+                android:contentDescription="@string/hero_avatar"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/textViewHeroDesciption"
+                android:layout_width="wrap_content"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@{hero_description}"
+                android:textColor="@color/light_gray"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button"
+                style="@style/MyButtonStyle2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:text="@string/comics" />
+
+            <Button
+                android:id="@+id/button2"
+                style="@style/MyButtonStyle2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5sp"
+                android:layout_marginEnd="15dp"
+                android:text="@string/stories" />
+
+            <Button
+                android:id="@+id/button3"
+                style="@style/MyButtonStyle2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5sp"
+                android:layout_marginEnd="15dp"
+                android:text="@string/series" />
+
+            <Button
+                android:id="@+id/button4"
+                style="@style/MyButtonStyle2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5sp"
+                android:layout_marginEnd="15dp"
+                android:text="@string/events" />
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="30dp">
+
+            </FrameLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 </layout>

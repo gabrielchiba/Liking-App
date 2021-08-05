@@ -78,7 +78,7 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
     public void setupRecyclerView() {
         RecyclerView recyclerView = binding.heroesList;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new SuperHeroRecyclerViewAdapter(this, new ArrayList<>());
+        adapter = new SuperHeroRecyclerViewAdapter(this, new ArrayList<>(), false);
         adapter.setActionListener(this);
         recyclerView.setAdapter(adapter);
     }
