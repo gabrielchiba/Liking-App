@@ -172,7 +172,8 @@
                 style="@style/MyButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="3sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="0"
                 android:fontFamily="@font/montserrat_semi_bold"
                 android:text="@string/acess_register" />
@@ -180,9 +181,9 @@
             <Button
                 android:id="@+id/buttonApi"
                 style="@style/MyButtonStyle"
+                android:background="@drawable/bg_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="3sp"
                 android:layout_weight="0"
                 android:fontFamily="@font/montserrat_semi_bold"
                 android:text="@string/acess_gallery" />
