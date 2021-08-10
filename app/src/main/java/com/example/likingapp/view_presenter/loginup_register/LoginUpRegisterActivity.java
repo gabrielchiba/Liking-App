@@ -17,7 +17,7 @@ import com.example.likingapp.view_presenter.register_email.RegisterEmailActivity
 import com.example.likingapp.databinding.ActivityLoginupRegisterBinding;
 import com.example.likingapp.view_presenter.simple_api_call.SimpleAPICallActivity;
 import com.example.likingapp.models.OwnUser;
-import com.facebook.stetho.Stetho;
+//import com.facebook.stetho.Stetho;
 
 public class LoginUpRegisterActivity extends AppCompatActivity implements LoginUpRegisterContract.View {
 
@@ -27,7 +27,7 @@ public class LoginUpRegisterActivity extends AppCompatActivity implements LoginU
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Stetho.initializeWithDefaults(this);
+//        Stetho.initializeWithDefaults(this);
         presenter = new LoginUpRegisterPresenter(this, this);
 
         binding = DataBindingUtil.setContentView(this,

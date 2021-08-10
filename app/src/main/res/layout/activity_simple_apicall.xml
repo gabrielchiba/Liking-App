@@ -88,7 +88,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/heroesList"
                 android:layout_width="wrap_content"
-                android:layout_height="450dp"
+                android:layout_height="400dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="40dp"
