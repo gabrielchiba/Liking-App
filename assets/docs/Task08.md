@@ -11,8 +11,8 @@ Essa tarefa consiste em adicionar o *wrapper* do banco de dados SQLite chamado *
 ```xml
 <application ... />
     <provider
-        android:name="br.com.redetendencia.pdvmobile.pdv.PROVIDER_AUTHORITY"
-        android:authorities="br.com.integrati.sprinkles_inti_library.CONTENT_PROVIDER_AUTHORITY"
+        android:name="com.empresa.mobile.PROVIDER_AUTHORITY"
+        android:authorities="com.sprinkles.CONTENT_PROVIDER_AUTHORITY"
         android:exported="false" />
 </application>
 ```
