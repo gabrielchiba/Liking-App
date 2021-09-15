@@ -1,8 +1,14 @@
 package com.example.likingapp.view_presenter.loginup_register;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.example.likingapp.models.DaoSession;
 import com.example.likingapp.models.OwnUser;
+import com.example.likingapp.models.OwnUserDao;
+
+import java.util.List;
+import java.util.logging.Logger;
 
 import se.emilsjolander.sprinkles.Query;
 
@@ -34,13 +40,14 @@ public class LoginUpRegisterPresenter implements LoginUpRegisterContract.Present
     }
 
     @Override
-    public void registerOwnUserOnDB(OwnUser ownUser) {
-        ownUser.save();
+    public void registerOwnUserOnDB(OwnUserDao daoSession, OwnUser ownUser) {
+        daoSession.insert(ownUser);
     }
 
     @Override
-    public boolean checkUserLoginExist(OwnUser user) {
-        return Query.one(OwnUser.class, " SELECT * FROM own_user WHERE login = '" + user.login + "'", true).get() != null;
+    public boolean checkUserLoginExist(OwnUserDao daoSession, OwnUser user) {
+        return !daoSession.queryBuilder().where(OwnUserDao.Properties.Login.eq(user.login)).list().isEmpty();
+//        return Query.one(OwnUser.class, " SELECT * FROM own_user WHERE login = '" + user.login + "'", true).get() != null;
     }
 
     @Override
@@ -50,8 +57,15 @@ public class LoginUpRegisterPresenter implements LoginUpRegisterContract.Present
     }
 
     @Override
-    public OwnUser getUserByLogin(String login) {
-        return Query.one(OwnUser.class, " SELECT * FROM own_user WHERE login = '" + login + "'", true).get();
+    public OwnUser getUserByLogin(OwnUserDao daoSession, String login) {
+        List<OwnUser> ownUserList = daoSession.queryBuilder().where(OwnUserDao.Properties.Login.eq(login)).list();
+        OwnUser ownUser = null;
+
+        if (!ownUserList.isEmpty())
+            ownUser = ownUserList.get(0);
+
+        Log.d("DAO", String.valueOf(ownUser));
+        return ownUser;
     }
 
 }

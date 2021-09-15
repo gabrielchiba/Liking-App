@@ -4,7 +4,9 @@ import android.content.Intent;
 
 import androidx.activity.result.ActivityResultLauncher;
 
+import com.example.likingapp.models.DaoSession;
 import com.example.likingapp.models.OwnUser;
+import com.example.likingapp.models.OwnUserDao;
 
 public interface LoginUpRegisterContract {
 
@@ -19,9 +21,9 @@ public interface LoginUpRegisterContract {
         boolean haveBlankFields(OwnUser user);
         boolean isNullOrEmpty(String... values);
         OwnUser createNewEmptyOwnUser();
-        void registerOwnUserOnDB(OwnUser ownUser);
-        boolean checkUserLoginExist(OwnUser user);
+        void registerOwnUserOnDB(OwnUserDao daoSession, OwnUser ownUser);
+        boolean checkUserLoginExist(OwnUserDao daoSession, OwnUser user);
         boolean isUserWrong(OwnUser user, OwnUser registeredUser);
-        OwnUser getUserByLogin(String login);
+        OwnUser getUserByLogin(OwnUserDao daoSession, String login);
     }
 }

@@ -62,7 +62,7 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
 
         userID = getIntent().getLongExtra("registeredUserID", 0);
 
-        OwnUser user = Query.one(OwnUser.class, " SELECT * FROM own_user WHERE id = "+userID, true).get();
+        OwnUser user = new OwnUser();
 
         sendExtrasToPersonalListFragment();
 

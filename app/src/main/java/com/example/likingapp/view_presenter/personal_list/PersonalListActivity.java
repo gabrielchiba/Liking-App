@@ -46,7 +46,7 @@ public class PersonalListActivity extends AppCompatActivity implements PersonalL
 
         userID = getIntent().getLongExtra("registeredUserID", 0);
 
-        OwnUser user = Query.one(OwnUser.class, " SELECT * FROM own_user WHERE id = "+userID, true).get();
+        OwnUser user = new OwnUser();
 
         setExtras(user);
         setFragment(PersonalListFragment.newInstance());

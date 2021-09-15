@@ -9,13 +9,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.likingapp.LikingApp;
 import com.example.likingapp.R;
 import com.example.likingapp.databinding.ActivityRegisterEmailBinding;
+import com.example.likingapp.models.OwnUserDao;
 
 public class RegisterEmailActivity extends AppCompatActivity implements RegisterEmailContract.View{
 
     private ActivityRegisterEmailBinding binding;
     private RegisterEmailContract.Presenter presenter;
+    private OwnUserDao dbUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,8 @@ public class RegisterEmailActivity extends AppCompatActivity implements Register
         presenter = new RegisterEmailPresenter(this, this);
         binding = DataBindingUtil.setContentView(this,
                 R.layout.activity_register_email);
+
+        dbUser = ((LikingApp)getApplication()).getDaoSession().getOwnUserDao();
 
         binding.buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +45,7 @@ public class RegisterEmailActivity extends AppCompatActivity implements Register
         if (!presenter.isValidEmail(registeredMail)) {
             Toast.makeText(this, this.getString(R.string.insert_valid_email), Toast.LENGTH_SHORT).show();
         }
-        else if (presenter.emailExists(registeredMail)){
+        else if (presenter.emailExists(dbUser, registeredMail)){
             Toast.makeText(this, this.getString(R.string.email_exists), Toast.LENGTH_SHORT).show();
         } else {
             Intent returnIntent = new Intent();

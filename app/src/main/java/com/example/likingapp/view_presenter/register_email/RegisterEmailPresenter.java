@@ -3,6 +3,9 @@ package com.example.likingapp.view_presenter.register_email;
 import android.content.Context;
 
 import com.example.likingapp.models.OwnUser;
+import com.example.likingapp.models.OwnUserDao;
+
+import java.util.List;
 
 import se.emilsjolander.sprinkles.Query;
 
@@ -25,11 +28,11 @@ public class RegisterEmailPresenter implements RegisterEmailContract.Presenter{
     }
 
     @Override
-    public boolean emailExists(String email) {
-        OwnUser user = Query.one(OwnUser.class, " SELECT * FROM own_user WHERE email = '"+email+"'", true).get();
+    public boolean emailExists(OwnUserDao daoSession, String email) {
+        List<OwnUser> ownUserList = daoSession.queryBuilder().where(OwnUserDao.Properties.Email.eq(email)).list();
         // Check if user exists before access email attribute
-        if (user != null) {
-            return user.email.equals(email);
+        if (!ownUserList.isEmpty()) {
+            return ownUserList.get(0).email.equals(email);
         }
         else return false;
     }
