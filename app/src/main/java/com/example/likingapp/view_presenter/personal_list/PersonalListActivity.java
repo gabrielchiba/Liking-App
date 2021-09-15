@@ -13,9 +13,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.likingapp.LikingApp;
 import com.example.likingapp.R;
 import com.example.likingapp.adapters.SuperHeroRecyclerViewAdapter;
 import com.example.likingapp.databinding.ActivityPersonalListBinding;
+import com.example.likingapp.models.OwnUserDao;
 import com.example.likingapp.view_presenter.fragment_personal_list.PersonalListFragment;
 import com.example.likingapp.models.OwnUser;
 import com.example.likingapp.view_presenter.simple_api_call.SimpleAPICallActivity;
@@ -44,9 +46,11 @@ public class PersonalListActivity extends AppCompatActivity implements PersonalL
         binding = DataBindingUtil.setContentView(this,
                 R.layout.activity_personal_list);
 
+        OwnUserDao dbUser = ((LikingApp) getApplication()).getDaoSession().getOwnUserDao();
+
         userID = getIntent().getLongExtra("registeredUserID", 0);
 
-        OwnUser user = new OwnUser();
+        OwnUser user = dbUser.queryBuilder().where(OwnUserDao.Properties.Id.eq(userID)).list().get(0);
 
         setExtras(user);
         setFragment(PersonalListFragment.newInstance());

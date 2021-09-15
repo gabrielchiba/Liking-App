@@ -14,10 +14,12 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.likingapp.LikingApp;
 import com.example.likingapp.R;
 import com.example.likingapp.adapters.SuperHeroRecyclerViewAdapter;
 import com.example.likingapp.api.RetrofitClient;
 import com.example.likingapp.databinding.ActivitySimpleApicallBinding;
+import com.example.likingapp.models.OwnUserDao;
 import com.example.likingapp.view_presenter.fragment_api_call.APICallFragment;
 import com.example.likingapp.view_presenter.superhero_info.SuperheroInfoActivity;
 import com.example.likingapp.models.Hero;
@@ -60,9 +62,11 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
 
         appUtils = new AppUtils(getApplicationContext());
 
+        OwnUserDao dbUser = ((LikingApp) getApplication()).getDaoSession().getOwnUserDao();
+
         userID = getIntent().getLongExtra("registeredUserID", 0);
 
-        OwnUser user = new OwnUser();
+        OwnUser user = dbUser.queryBuilder().where(OwnUserDao.Properties.Id.eq(userID)).list().get(0);
 
         sendExtrasToPersonalListFragment();
 
