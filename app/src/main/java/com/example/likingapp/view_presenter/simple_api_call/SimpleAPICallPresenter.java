@@ -5,6 +5,8 @@ import android.content.Context;
 import com.example.likingapp.api.RetrofitClient;
 import com.example.likingapp.models.CharacterDataWrapper;
 import com.example.likingapp.models.Hero;
+import com.example.likingapp.models.HeroDao;
+import com.example.likingapp.models.OwnUserDao;
 import com.example.likingapp.utils.constants;
 
 import java.util.List;
@@ -37,10 +39,10 @@ public class SimpleAPICallPresenter implements SimpleAPICallContract.Presenter{
     }
 
     @Override
-    public void registerHeroOnDB(Hero hero, long userID) {
+    public void registerHeroOnDB(HeroDao daoSession, Hero hero, long userID) {
         hero.thumbnail_url = hero.thumbnail.getPath() + '.' + hero.thumbnail.getExtension();
         hero.user_id = userID;
-        hero.save();
+        daoSession.insert(hero);
     }
 
 

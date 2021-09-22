@@ -8,6 +8,7 @@ import com.example.likingapp.R;
 import com.example.likingapp.api.RetrofitClient;
 import com.example.likingapp.models.CharacterDataWrapper;
 import com.example.likingapp.models.Hero;
+import com.example.likingapp.models.HeroDao;
 import com.example.likingapp.utils.constants;
 
 import java.util.List;
@@ -27,8 +28,8 @@ public class SuperHeroInfoPresenter implements SuperheroInfoContract.Presenter{
     }
 
     @Override
-    public Hero getSuperHeroByHeroIdOnDB(long heroId) {
-        return Query.one(Hero.class, " SELECT * FROM hero WHERE hero_id = " + heroId, true).get();
+    public Hero getSuperHeroByHeroIdOnDB(HeroDao daoSession, long heroId) {
+        return daoSession.queryBuilder().where(HeroDao.Properties.Id.eq(heroId)).list().get(0);
     }
 
     @Override

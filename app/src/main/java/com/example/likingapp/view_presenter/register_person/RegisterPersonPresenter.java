@@ -3,7 +3,12 @@ package com.example.likingapp.view_presenter.register_person;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.likingapp.models.OwnUser;
+import com.example.likingapp.models.OwnUserDao;
 import com.example.likingapp.models.Person;
+import com.example.likingapp.models.PersonDao;
+
+import java.util.List;
 
 import mk.webfactory.dz.maskededittext.MaskedEditText;
 import se.emilsjolander.sprinkles.Query;
@@ -23,8 +28,8 @@ public class RegisterPersonPresenter implements RegisterPersonContract.Presenter
     }
 
     @Override
-    public void registerPersonOnDB(Person person) {
-        person.save();
+    public void registerPersonOnDB(PersonDao daoSession, Person person) {
+        daoSession.insert(person);
     }
 
     @Override
@@ -60,21 +65,21 @@ public class RegisterPersonPresenter implements RegisterPersonContract.Presenter
         return newId == registeredId;
     }
 
+//    @Override
+//    public boolean checkPersonDBExists() {
+//        return Query.one(Person.class, " SELECT name FROM sqlite_master WHERE type = 'table' AND name= 'person'", true).get() != null;
+//    }
+
     @Override
-    public boolean checkPersonDBExists() {
-        return Query.one(Person.class, " SELECT name FROM sqlite_master WHERE type = 'table' AND name= 'person'", true).get() != null;
+    public boolean checkPersonCpfExists(PersonDao daoSession, Person person) {
+        List<Person> personList = daoSession.queryBuilder().where(PersonDao.Properties.Cpf.eq(person.cpf)).list();
+
+        return (!personList.isEmpty() && !isSameUser(personList.get(0).id, person.id));
     }
 
     @Override
-    public boolean checkPersonCpfExists(Person person) {
-        Person newPerson = Query.one(Person.class, " SELECT * FROM person WHERE cpf = '" + person.cpf + "'", true).get();
-
-        return (newPerson != null && !isSameUser(newPerson.id, person.id));
-    }
-
-    @Override
-    public Person getOnePersonOfUserFromDB(long id) {
-        return Query.one(Person.class, " SELECT * FROM person WHERE id = '" + id + "'", true).get();
+    public Person getOnePersonOfUserFromDB(PersonDao daoSession, long id) {
+        return daoSession.queryBuilder().where(PersonDao.Properties.Id.eq(id)).list().get(0);
     }
 
     @Override

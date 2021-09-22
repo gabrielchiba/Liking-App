@@ -13,8 +13,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.likingapp.LikingApp;
 import com.example.likingapp.R;
 import com.example.likingapp.databinding.ActivityPeopleListBinding;
+import com.example.likingapp.models.PersonDao;
 import com.example.likingapp.view_presenter.register_person.RegisterPersonActivity;
 import com.example.likingapp.adapters.PeopleRecyclerViewAdapter;
 import com.example.likingapp.utils.AppUtils;
@@ -30,6 +32,7 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
 
     private ActivityPeopleListBinding binding;
     private PeopleListContract.Presenter presenter;
+    private PersonDao dbPerson;
 
     // Foreign Key Reference
     private long userID;
@@ -43,6 +46,8 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
         presenter = new PeopleListPresenter(this, this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_people_list);
         userID = getIntent().getLongExtra("registeredUserID", 0);
+
+        dbPerson = ((LikingApp)getApplication()).getDaoSession().getPersonDao();
 
         setupRecyclerView();
 
@@ -66,7 +71,7 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
                         long id = data.getLongExtra("registeredPersonID", 0);
 
                         if (!isUpdate) {
-                            adapter.add(adapter.getItemCount(), presenter.getOnePersonOfUserFromDB(id));
+                            adapter.add(adapter.getItemCount(), presenter.getOnePersonOfUserFromDB(dbPerson, id));
                         }
                     }
                 });
@@ -76,14 +81,14 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
     public void setupRecyclerView() {
         RecyclerView recyclerView = binding.peopleList;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new PeopleRecyclerViewAdapter(this, presenter.getAllPersonsOfUserFromDB(userID));
+        adapter = new PeopleRecyclerViewAdapter(this, presenter.getAllPersonsOfUserFromDB(dbPerson, userID));
         adapter.setActionListener(this);
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void updateElement(int position, long id) {
-        adapter.update(position, presenter.getOnePersonOfUserFromDB(id));
+        adapter.update(position, presenter.getOnePersonOfUserFromDB(dbPerson, id));
     }
 
     @Override
@@ -117,7 +122,7 @@ public class PeopleListActivity extends AppCompatActivity implements PeopleListC
 
     @Override
     public void deleteItem(int position) {
-        presenter.removePersonFromDB(adapter.getItem(position));
+        presenter.removePersonFromDB(dbPerson, adapter.getItem(position));
         adapter.remove(position);
     }
 

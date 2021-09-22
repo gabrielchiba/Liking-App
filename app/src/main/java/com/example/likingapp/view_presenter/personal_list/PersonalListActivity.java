@@ -17,7 +17,9 @@ import com.example.likingapp.LikingApp;
 import com.example.likingapp.R;
 import com.example.likingapp.adapters.SuperHeroRecyclerViewAdapter;
 import com.example.likingapp.databinding.ActivityPersonalListBinding;
+import com.example.likingapp.models.HeroDao;
 import com.example.likingapp.models.OwnUserDao;
+import com.example.likingapp.models.PersonDao;
 import com.example.likingapp.view_presenter.fragment_personal_list.PersonalListFragment;
 import com.example.likingapp.models.OwnUser;
 import com.example.likingapp.view_presenter.simple_api_call.SimpleAPICallActivity;
@@ -34,6 +36,8 @@ public class PersonalListActivity extends AppCompatActivity implements PersonalL
     private ActivityPersonalListBinding binding;
     private PersonalListContract.Presenter presenter;
     SuperHeroRecyclerViewAdapter adapter;
+    private HeroDao dbHero;
+    private OwnUserDao dbUser;
 
     // Foreign Key Reference
     long userID;
@@ -46,7 +50,8 @@ public class PersonalListActivity extends AppCompatActivity implements PersonalL
         binding = DataBindingUtil.setContentView(this,
                 R.layout.activity_personal_list);
 
-        OwnUserDao dbUser = ((LikingApp) getApplication()).getDaoSession().getOwnUserDao();
+        dbHero = ((LikingApp)getApplication()).getDaoSession().getHeroDao();
+        dbUser = ((LikingApp)getApplication()).getDaoSession().getOwnUserDao();
 
         userID = getIntent().getLongExtra("registeredUserID", 0);
 
@@ -77,7 +82,7 @@ public class PersonalListActivity extends AppCompatActivity implements PersonalL
         RecyclerView recyclerView = binding.personalHeroesList;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new SuperHeroRecyclerViewAdapter(this,
-                presenter.getAllHeroesOfUserFromDB(userID), true);
+                presenter.getAllHeroesOfUserFromDB(dbHero, userID), true);
         adapter.setActionListener(this);
         recyclerView.setAdapter(adapter);
     }
@@ -111,7 +116,7 @@ public class PersonalListActivity extends AppCompatActivity implements PersonalL
     @Override
     public void addOrDeleteItem(int position) {
         // Function Now Deletes Items
-        presenter.removeHeroByIDFromDB(adapter.getItem(position).real_id);
+        presenter.removeHeroByIDFromDB(dbHero, adapter.getItem(position).real_id);
         adapter.remove(position);
         Toast.makeText(this, R.string.remove_hero, Toast.LENGTH_SHORT).show();
     }

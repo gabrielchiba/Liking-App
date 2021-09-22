@@ -19,6 +19,7 @@ import com.example.likingapp.R;
 import com.example.likingapp.adapters.SuperHeroRecyclerViewAdapter;
 import com.example.likingapp.api.RetrofitClient;
 import com.example.likingapp.databinding.ActivitySimpleApicallBinding;
+import com.example.likingapp.models.HeroDao;
 import com.example.likingapp.models.OwnUserDao;
 import com.example.likingapp.view_presenter.fragment_api_call.APICallFragment;
 import com.example.likingapp.view_presenter.superhero_info.SuperheroInfoActivity;
@@ -41,6 +42,7 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
 
     private ActivitySimpleApicallBinding binding;
     private SimpleAPICallContract.Presenter presenter;
+    private HeroDao dbHero;
 
     // Auxiliary Class
     AppUtils appUtils;
@@ -63,6 +65,7 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
         appUtils = new AppUtils(getApplicationContext());
 
         OwnUserDao dbUser = ((LikingApp) getApplication()).getDaoSession().getOwnUserDao();
+        dbHero = ((LikingApp)getApplication()).getDaoSession().getHeroDao();
 
         userID = getIntent().getLongExtra("registeredUserID", 0);
 
@@ -162,7 +165,7 @@ public class SimpleAPICallActivity extends AppCompatActivity implements SimpleAP
 
     @Override
     public void addOrDeleteItem(int position) {
-        presenter.registerHeroOnDB(adapter.getItem(position), userID);
+        presenter.registerHeroOnDB(dbHero, adapter.getItem(position), userID);
         Toast.makeText(this, R.string.added_hero, Toast.LENGTH_SHORT).show();
     }
 }

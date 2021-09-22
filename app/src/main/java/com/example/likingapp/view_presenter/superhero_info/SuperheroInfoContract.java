@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.likingapp.models.CharacterDataWrapper;
 import com.example.likingapp.models.Hero;
+import com.example.likingapp.models.HeroDao;
 
 import retrofit2.Call;
 
@@ -15,7 +16,7 @@ public interface SuperheroInfoContract {
 
     }
     interface Presenter {
-        Hero getSuperHeroByHeroIdOnDB(long heroId);
+        Hero getSuperHeroByHeroIdOnDB(HeroDao daoSession, long heroId);
         Call<CharacterDataWrapper> getSuperHeroesFromAPI(String id, String ts, String hash);
     }
 }

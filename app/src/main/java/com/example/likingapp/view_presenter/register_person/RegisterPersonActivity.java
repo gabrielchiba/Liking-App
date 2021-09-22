@@ -10,9 +10,11 @@ import android.os.Bundle;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
+import com.example.likingapp.LikingApp;
 import com.example.likingapp.R;
 import com.example.likingapp.databinding.ActivityRegisterPersonBinding;
 import com.example.likingapp.models.Person;
+import com.example.likingapp.models.PersonDao;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -24,6 +26,7 @@ public class RegisterPersonActivity extends AppCompatActivity implements Registe
 
     private ActivityRegisterPersonBinding binding;
     private RegisterPersonContract.Presenter presenter;
+    private PersonDao dbPerson;
 
     // Foreign Key user reference
     private long userID;
@@ -36,6 +39,8 @@ public class RegisterPersonActivity extends AppCompatActivity implements Registe
         super.onCreate(savedInstanceState);
         presenter = new RegisterPersonPresenter(this, this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register_person);
+
+        dbPerson = ((LikingApp)getApplication()).getDaoSession().getPersonDao();
 
         // Create new empty person
         Person person = presenter.createNewEmptyPerson();
@@ -65,7 +70,7 @@ public class RegisterPersonActivity extends AppCompatActivity implements Registe
         else if (!presenter.isValidEmail(person.email)) {
             Toast.makeText(this, R.string.insert_valid_email, Toast.LENGTH_SHORT).show();
         }
-        else if (presenter.checkPersonCpfExists(person)) {
+        else if (presenter.checkPersonCpfExists(dbPerson, person)) {
             Toast.makeText(this, R.string.cpf_exists, Toast.LENGTH_SHORT).show();
         }
         else {
@@ -77,7 +82,7 @@ public class RegisterPersonActivity extends AppCompatActivity implements Registe
     @Override
     public void savePerson(Person person) {
         person.user_id = userID;
-        presenter.registerPersonOnDB(person);
+        presenter.registerPersonOnDB(dbPerson, person);
         returnRegisteredPersonID(person);
     }
 
@@ -122,7 +127,7 @@ public class RegisterPersonActivity extends AppCompatActivity implements Registe
 
     @Override
     public void editPerson(long id) {
-        Person person = presenter.getOnePersonOfUserFromDB(id);
+        Person person = presenter.getOnePersonOfUserFromDB(dbPerson, id);
         initiatePreviousValues(person);
     }
 }

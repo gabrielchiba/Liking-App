@@ -2,7 +2,10 @@ package com.example.likingapp.view_presenter.people_list;
 
 import android.content.Context;
 
+import com.example.likingapp.models.OwnUser;
+import com.example.likingapp.models.OwnUserDao;
 import com.example.likingapp.models.Person;
+import com.example.likingapp.models.PersonDao;
 
 import java.util.List;
 
@@ -19,20 +22,23 @@ public class PeopleListPresenter implements PeopleListContract.Presenter{
     }
 
     @Override
-    public List<Person> getAllPersonsOfUserFromDB(long userId) {
-        CursorList<Person> cursorList = Query.many(Person.class, " SELECT * FROM person WHERE user_id = '" + userId + "'", true).get();
-        List<Person> personList = cursorList.asList();
-        cursorList.close();
+    public List<Person> getAllPersonsOfUserFromDB(PersonDao daoSession, long userId) {
+        List<Person> personList = daoSession.queryBuilder().where(PersonDao.Properties.User_id.eq(userId)).list();
         return personList;
     }
 
     @Override
-    public Person getOnePersonOfUserFromDB(long id) {
-        return Query.one(Person.class, " SELECT * FROM person WHERE id = '" + id + "'", true).get();
+    public Person getOnePersonOfUserFromDB(PersonDao daoSession, long id) {
+        Person person = null;
+        List<Person> personList = daoSession.queryBuilder().where(PersonDao.Properties.Id.eq(id)).list();
+        if (!personList.isEmpty())
+            person = personList.get(0);
+        return person;
+
     }
 
     @Override
-    public void removePersonFromDB(Person person) {
-        person.delete();
+    public void removePersonFromDB(PersonDao daoSession, Person person) {
+        daoSession.delete(person);
     }
 }

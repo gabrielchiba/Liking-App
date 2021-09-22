@@ -1,6 +1,7 @@
 package com.example.likingapp.view_presenter.register_person;
 
 import com.example.likingapp.models.Person;
+import com.example.likingapp.models.PersonDao;
 
 import java.util.Calendar;
 
@@ -21,13 +22,13 @@ public interface RegisterPersonContract {
         Person createNewEmptyPerson();
         boolean haveBlankFields(Person person);
         boolean isNullOrEmpty(String... values);
-        void registerPersonOnDB(Person person);
+        void registerPersonOnDB(PersonDao daoSession, Person person);
         boolean isValidEmail(CharSequence target);
         boolean isValidPhoneNumber(String phone);
         boolean isSameUser(long newId, long registeredId);
-        boolean checkPersonDBExists();
-        boolean checkPersonCpfExists(Person person);
-        Person getOnePersonOfUserFromDB(long id);
+//        boolean checkPersonDBExists();
+        boolean checkPersonCpfExists(PersonDao daoSession, Person person);
+        Person getOnePersonOfUserFromDB(PersonDao daoSession, long id);
         String getRawEditValue(MaskedEditText maskedEditText);
     }
 }

@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.likingapp.models.CharacterDataWrapper;
 import com.example.likingapp.models.Hero;
+import com.example.likingapp.models.HeroDao;
 import com.example.likingapp.models.OwnUser;
 
 import java.util.List;
@@ -22,6 +23,6 @@ public interface SimpleAPICallContract {
 
     interface Presenter {
         Call<CharacterDataWrapper> getSuperHeroesFromAPI(String ts, String hash, String limit, String offset);
-        void registerHeroOnDB(Hero hero, long userID);
+        void registerHeroOnDB(HeroDao daoSession, Hero hero, long userID);
     }
 }

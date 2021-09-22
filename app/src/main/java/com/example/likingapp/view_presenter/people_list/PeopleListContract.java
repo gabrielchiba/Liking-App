@@ -5,6 +5,7 @@ import android.content.Intent;
 import androidx.activity.result.ActivityResultLauncher;
 
 import com.example.likingapp.models.Person;
+import com.example.likingapp.models.PersonDao;
 
 import java.util.List;
 
@@ -18,8 +19,8 @@ public interface PeopleListContract {
     }
 
     interface Presenter {
-        List<Person> getAllPersonsOfUserFromDB(long userId);
-        Person getOnePersonOfUserFromDB(long id);
-        void removePersonFromDB(Person person);
+        List<Person> getAllPersonsOfUserFromDB(PersonDao daoSession, long userId);
+        Person getOnePersonOfUserFromDB(PersonDao daoSession, long id);
+        void removePersonFromDB(PersonDao daoSession, Person person);
     }
 }
